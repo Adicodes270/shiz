@@ -27,14 +27,14 @@ body {
 }
 
 .custom-cursor {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: var(--blue);
-  border-radius: 50%;
-  pointer-events: none; 
-  transform: translate(-50%, -50%);
-  z-index: 9999;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--blue);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
 }
 
 
@@ -55,7 +55,7 @@ body::before {
     inset: 0;
     z-index: -1;
     /* Clean anime tech grid */
-    background-image: 
+    background-image:
         linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 32px 32px;
@@ -63,7 +63,8 @@ body::before {
 }
 
 /* Animated glowing orbs for that color pop */
-.hero::before, .hero::after {
+.hero::before,
+.hero::after {
     content: '';
     position: absolute;
     width: 400px;
@@ -79,19 +80,26 @@ body::before {
 .hero::before {
     top: 15%;
     left: 20%;
-    background: var(--blue); /* Your deep blue */
+    background: var(--blue);
+    /* Your deep blue */
 }
 
 .hero::after {
     bottom: 15%;
     right: 20%;
-    background: var(--red); /* The accent red from your theme */
+    background: var(--red);
+    /* The accent red from your theme */
     animation-delay: -5s;
 }
 
 @keyframes floatGlow {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, -30px) scale(1.15); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, -30px) scale(1.15);
+    }
 }
 
 
@@ -131,7 +139,7 @@ body::before {
 }
 
 nav {
-    
+
     position: fixed;
     width: 70%;
     top: 1%;
@@ -186,16 +194,21 @@ nav {
 }
 
 .nav-links a {
-    font-size: 13px;
+
+    font-size: 15px;
     font-weight: 400;
     color: var(--muted);
     text-decoration: none;
     letter-spacing: 0.3px;
-    transition: color 0.2s;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
 }
 
 .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.07);
     color: var(--text);
+    /* ensures text stays fully visible */
 }
 
 .nav-end {
@@ -323,7 +336,7 @@ nav {
 }
 
 .profile-card:hover {
-    
+
     /* box-shadow: #0090e4; */
     /* Changes to your red accent color on hover */
     /* transform: translateY(-4px); */
@@ -1295,13 +1308,14 @@ footer {
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 
-     nav {
+    nav {
         width: 100%;
     }
 
 }
+
 @media (max-width: 900px) {
     .commands-grid {
         grid-template-columns: 1fr 1fr;
