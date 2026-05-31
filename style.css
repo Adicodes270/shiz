@@ -230,11 +230,11 @@ nav {
 
 .nav-gh:hover {
     color: var(--text);
-    border-color: var(--border-h);
+    border-color: var(--border-red);
     background: rgba(255, 255, 255, 0.06);
 }
 
- .nav-add {
+.nav-add {
     display: inline-flex;
     align-items: center;
     gap: 7px;
@@ -245,13 +245,12 @@ nav {
     text-decoration: none;
     color: var(--bg);
     background: var(--blue);
-    transition: all 0.22s var(--ease);
+    transition: background 0.22s var(--ease);
 }
 
-/* .nav-add:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
-} */
+.nav-add:hover {
+    background-color: var(--red);
+}
 
 .nav-toggle {
     display: none;
@@ -319,7 +318,7 @@ nav {
     padding: 22px 0;
     font-size: 28px;
     font-weight: 500;
-    color: var(--muted);
+    color: rgb(223, 223, 223);;
     text-decoration: none;
     border-bottom: none;
     position: relative;
@@ -335,10 +334,10 @@ nav {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 30px;
+    font-size: 20px;
     background: none;
     border: none;
-    color: var(--muted);
+    color: rgb(223, 223, 223);
     z-index: 10001;
 }
 
@@ -484,18 +483,55 @@ nav {
 }
 
 /* Identity Typography */
+/* .profile-identity {
+    display: flex;
+    flex-direction: column;
+} */
+
 .profile-identity {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
+
+.owner-tag {
+    position: absolute;
+    top: -22px;
+    left: -15px;
+
+    background: #000;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2px 20px;
+    border-radius: 4px;
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .25s ease;
+    white-space: nowrap;
+}
+
+.profile-card:hover .owner-tag {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 .profile-title {
+    /* margin-top : 20px; */
     font-family: 'Bebas Neue', sans-serif;
     font-size: 28px;
     letter-spacing: 2px;
     color: hsl(0, 0%, 93%);
     line-height: 0.9;
 }
+
 
 .profile-subtitle {
     font-family: 'DM Sans', sans-serif;
@@ -607,6 +643,10 @@ nav {
     cursor: pointer;
 }
 
+.inner-card-btn:hover{
+    background-color: var(--red);
+
+}
 /* Add Friend Unique Accent */
 .add-friend-btn {
     background: rgba(255, 255, 255, 0.04);
