@@ -18,7 +18,11 @@ window.addEventListener('DOMContentLoaded', () => {
   playMusic();
 
   // 2. Backup: Try to play on the first user click if autoplay was blocked
-  document.addEventListener('click', playMusic);
+  document.addEventListener('click', function(e) {
+  if (!e.target.closest('nav')) {
+    playMusic();
+  }
+});
 });
 
 
@@ -52,17 +56,27 @@ document.addEventListener('mousemove', (e) => {
 
 var navToggle = document.getElementById('nav-toggle');
 var mobileMenu = document.getElementById('mobile-menu');
-var iconMenu = document.getElementById('icon-menu');
-var iconClose = document.getElementById('icon-close');
-navToggle.addEventListener('click', function() {
-  var open = mobileMenu.classList.toggle('open');
-  iconMenu.style.display = open ? 'none' : 'block';
-  iconClose.style.display = open ? 'block' : 'none';
-});
+var mobileOverlay = document.getElementById('mobile-overlay');
+var mobileClose = document.querySelector('.nav-close');
+
+
+function openMenu() {
+  mobileMenu.classList.add('open');
+  mobileOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  mobileClose.style.display = "block";
+  mobileMenu.classList.remove('open');
+  mobileOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+navToggle.addEventListener('click', openMenu);
+mobileClose.addEventListener('click', closeMenu);
+mobileOverlay.addEventListener('click', closeMenu);
+
 document.querySelectorAll('.mobile-menu a').forEach(function(a) {
-  a.addEventListener('click', function() {
-    mobileMenu.classList.remove('open');
-    iconMenu.style.display = 'block';
-    iconClose.style.display = 'none';
-  });
+  a.addEventListener('click', closeMenu);
 });
