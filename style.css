@@ -517,6 +517,44 @@ nav {
     white-space: nowrap;
 }
 
+.profile-view {
+    position: absolute;
+    top: -29px;
+    left: 160px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    background: #1a1020;
+    color: #c084fc;
+    border: 1px solid rgba(192, 132, 252, 0.25);
+    padding: 5px 12px;
+    border-radius: 16px;
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    transform: translateY(10px);
+    transition: all .25s ease;
+    white-space: nowrap;
+}
+
+.profile-view-icon {
+    fill: #c084fc;
+    flex-shrink: 0;
+}
+
+/* #view-count {
+    color: #c084fc;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+} */
+
 .profile-card:hover .owner-tag {
     opacity: 1;
     transform: translateY(0);
