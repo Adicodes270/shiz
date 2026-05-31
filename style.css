@@ -262,7 +262,7 @@ nav {
     padding: 6px;
 }
 
-.nav-close {
+/* .nav-close {
     
     display: none;
     background: none;
@@ -299,6 +299,47 @@ nav {
     border-bottom: none;
     position: relative;
     transition: color 0.2s;
+} */
+
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    height: 100vh;
+    background: #0a0a0a;
+    z-index: 9999;
+    padding: 70px 30px 30px;
+    transition: right .3s ease;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 22px 0;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: none;
+    position: relative;
+    transition: color 0.2s;
+}
+
+
+.mobile-menu.open {
+    right: 0;
+}
+
+.nav-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    z-index: 10001;
 }
 
 .mobile-menu a.active {

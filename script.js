@@ -67,9 +67,7 @@ function openMenu() {
 }
 
 function closeMenu() {
-  mobileClose.style.display = "block";
   mobileMenu.classList.remove('open');
-  mobileOverlay.classList.remove('open');
   document.body.style.overflow = '';
 }
 
