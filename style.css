@@ -1157,7 +1157,7 @@ footer {
         display: block;
     }
 
-    /* .hero {
+    .hero {
         padding-top: 80px;
         padding-left: 16px;
         padding-right: 16px;
@@ -1166,7 +1166,7 @@ footer {
     .profile-card {
         max-width: 100%;
         width: 100%;
-        padding: 24px;
+        padding: 22px;
         border-radius: 24px;
     }
 
@@ -1211,40 +1211,114 @@ footer {
 
     .stat-item:nth-child(3) {
         border-top: 1px solid var(--border);
-    } */
+    }
+
+    /* Mobile menu full width */
+    .mobile-menu {
+        width: 75%;
+    }
 }
 
 /* ── MOBILE MEDIUM ── */
 @media (max-width: 480px) {
+    /* Nav */
+    .nav-inner {
+        height: 54px;
+    }
+
+    .nav-brand-name {
+        font-size: 18px;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+        width: 85%;
+        padding: 80px 28px 30px;
+    }
+
+    .mobile-menu a {
+        font-size: 24px;
+        padding: 18px 0;
+    }
+
+    /* Hero */
+    .hero {
+        padding-top: 70px;
+        padding-left: 14px;
+        padding-right: 14px;
+        min-height: 100svh;
+    }
+
+    /* Profile card — full width, comfortable padding */
+    .profile-card {
+        max-width: 100%;
+        width: 100%;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 6px 28px rgba(0, 80, 185, 0.5);
+    }
+
+    /* Profile header stacks nicely */
+    .profile-header {
+        gap: 14px;
+        margin-bottom: 18px;
+        align-items: flex-start;
+    }
+
     .profile-avatar {
-        width: 75px;
-        height: 75px;
+        width: 68px;
+        height: 68px;
+        flex-shrink: 0;
+    }
+
+    .status-badge {
+        width: 18px;
+        height: 18px;
+        bottom: 8px;
+        right: 3px;
+        border-width: 2px;
     }
 
     .profile-title {
-        font-size: 28px;
+        font-size: 26px;
     }
 
     .profile-subtitle {
         font-size: 12px;
     }
 
-    .inner-cards-container {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+    /* Owner tag — reposition so it doesn't overflow */
+    .owner-tag {
+        position: static;
+        display: inline-block;
+        transform: none;
+        opacity: 0;
+        margin-bottom: 4px;
     }
 
-    .inner-card {
-        padding: 12px;
+    .profile-card:hover .owner-tag {
+        opacity: 1;
     }
 
-    .inner-card-btn {
-        font-size: 11px;
-        padding: 8px 6px;
+    /* View count — reposition relative to card width */
+    .profile-view {
+        position: static;
+        display: inline-flex;
+        margin-top: 6px;
+        font-size: 13px;
+        padding: 4px 10px;
     }
 
+    /* Bio */
+    .profile-bio {
+        font-size: 13.5px;
+        margin-bottom: 16px;
+    }
+
+    /* Badges */
     .profile-badges {
         gap: 6px;
+        margin-bottom: 2px;
     }
 
     .badge {
@@ -1252,8 +1326,46 @@ footer {
         padding: 3px 8px;
     }
 
+    /* Inner cards — side by side on medium mobile */
+    .inner-cards-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    .inner-card {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .inner-card-thumb {
+        width: 38px;
+        height: 38px;
+    }
+
+    .inner-card-title {
+        font-size: 15px;
+    }
+
+    .inner-card-desc,
+    .inner-card-subtitle {
+        font-size: 10px;
+    }
+
+    .inner-card-btn {
+        font-size: 11px;
+        padding: 8px 4px;
+        gap: 4px;
+    }
+
+    .inner-card-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Misc */
     .wrap {
-        padding: 0 16px;
+        padding: 0 14px;
     }
 
     .stats-inner {
@@ -1266,24 +1378,67 @@ footer {
     }
 }
 
-/* ── MOBILE SMALL ── */
+/* ── MOBILE SMALL (≤380px) ── */
 @media (max-width: 380px) {
-    .inner-cards-container {
-        grid-template-columns: 1fr;
+    .nav-brand-name {
+        font-size: 16px;
+    }
+
+    .hero {
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     .profile-card {
-        padding: 18px;
-        border-radius: 18px;
+        padding: 16px;
+        border-radius: 16px;
     }
 
-    .nav-brand-name {
-        font-size: 17px;
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-title {
+        font-size: 23px;
+    }
+
+    /* Stack inner cards vertically on tiny screens */
+    .inner-cards-container {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .inner-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .inner-card-header {
+        flex: 1;
+    }
+
+    .inner-card-btn {
+        flex-shrink: 0;
+        width: auto;
+        padding: 8px 14px;
+        font-size: 11px;
+        white-space: nowrap;
     }
 
     .inner-card-thumb {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
+    }
+
+    .wrap {
+        padding: 0 12px;
+    }
+
+    .mobile-menu {
+        width: 90%;
     }
 }
 
