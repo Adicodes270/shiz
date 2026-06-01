@@ -18,11 +18,23 @@ window.addEventListener('DOMContentLoaded', () => {
   playMusic();
 
   // 2. Backup: Try to play on the first user click if autoplay was blocked
-  document.addEventListener('click', function(e) {
-  if (!e.target.closest('nav')) {
-    playMusic();
-  }
-});
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('nav')) {
+      playMusic();
+    }
+  });
+
+  const counter = new Counter({ workspace: 'shiz' });
+  const counterElement = document.querySelector('.view-count');
+
+  counter.up('page-vw')
+    .then(result => {
+      counterElement.textContent = result.value;
+    })
+    .catch(error => {
+      console.error('Error fetching counter:', error);
+      counterElement.textContent = 'N/A';
+    });
 });
 
 
@@ -75,6 +87,6 @@ navToggle.addEventListener('click', openMenu);
 mobileClose.addEventListener('click', closeMenu);
 mobileOverlay.addEventListener('click', closeMenu);
 
-document.querySelectorAll('.mobile-menu a').forEach(function(a) {
+document.querySelectorAll('.mobile-menu a').forEach(function (a) {
   a.addEventListener('click', closeMenu);
 });
