@@ -66,32 +66,35 @@ body::after {
     width: 300px;
     height: 300px;
     border-radius: 50%;
+    
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
     animation: bgRadar 4s ease-out infinite;
 }
 
 .radar-pulse span:nth-child(1) {
-    border: 2px solid var(--red);
+    border: 2px solid var(--purple);
+    
     animation-delay: 0s;
 }
 .radar-pulse span:nth-child(2) {
-    border: 2px solid var(--blue);
+    border: 2px solid var(--grey);
+    
     animation-delay: 1s;
 }
 .radar-pulse span:nth-child(3) {
-    border: 1.5px solid var(--red);
+    border: 1.5px solid var(--purple);
     animation-delay: 2s;
 }
 .radar-pulse span:nth-child(4) {
-    border: 1.5px solid var(--blue);
+    border: 1.5px solid var(--grey);
     animation-delay: 3s;
 }
 
 @keyframes bgRadar {
     0% {
         transform: translate(-50%, -50%) scale(0);
-        opacity: 0.7;
+        opacity: 0.9;
     }
     100% {
         transform: translate(-50%, -50%) scale(6);
@@ -131,14 +134,14 @@ body::before {
 .hero::before {
     top: 15%;
     left: 20%;
-    background: var(--blue);
+    background: var(--purple-dark);
     /* Your deep blue */
 }
 
 .hero::after {
     bottom: 15%;
     right: 20%;
-    background: var(--red);
+    background: rgb(65, 58, 58);
     /* The accent red from your theme */
     animation-delay: -5s;
 }
@@ -201,8 +204,8 @@ nav {
     background: rgba(16, 16, 20, 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid var(--red);
-    border-bottom: 1px solid var(--blue);
+    border-top: 2px solid var(--purple-dark);
+    border-bottom: 1px solid var(--border-h);
 }
 
 .nav-inner {
@@ -228,7 +231,7 @@ nav {
     height: 28px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--border-blue);
+    border: 1px solid var(--purple-bright);
     transition: all 1s var(--ease);
 
 }
@@ -243,12 +246,12 @@ nav {
 
 .nav-brand img:hover {
     transform: translateY(-2px);
-    border: 1px solid var(--border-red);
+    border: 1px solid var(--purple);
 }
 
 .nav-brand-name:hover {
     transform: translateY(-2px);
-    color: var(--blue);
+    color: var(--purple);
 }
 
 .nav-links {
@@ -289,14 +292,14 @@ nav {
     font-weight: 500;
     text-decoration: none;
     color: var(--muted);
-    border: 1px solid var(--border-blue);
+    border: 1px solid var(--purple-bright);
     background: rgba(255, 255, 255, 0.03);
     transition: all 1s var(--ease);
 }
 
 .nav-gh:hover {
     color: var(--text);
-    border-color: var(--border-red);
+    border-color: var(--purple);
     background: rgba(255, 255, 255, 0.06);
 }
 
@@ -310,12 +313,12 @@ nav {
     font-weight: 500;
     text-decoration: none;
     color: var(--bg);
-    background: var(--blue);
+    background: var(--purple);
     transition: all 1s var(--ease);
 }
 
 .nav-add:hover {
-    background-color: var(--red);
+    background-color: var(--purple-bright);
 }
 
 .nav-toggle {
@@ -419,7 +422,7 @@ nav {
     left: 0;
     width: 60px;
     height: 2px;
-    background: var(--blue);
+    background: var(--purple);
     border-radius: 2px;
 }
 
@@ -477,11 +480,11 @@ nav {
     width: 100%;
     max-width: 440px;
     background: linear-gradient(150deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 2%) 100%);
-    border: 1px solid var(--border-blue);
+    border: 2px solid var(--purple-dark);
     border-radius: 30px;
     padding: 24px;
     overflow: visible;
-    box-shadow: 0 10px 40px rgba(0, 80, 185, 0.7);
+    box-shadow: 0 10px 40px rgba(158, 52, 170, 0.7);
     transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
@@ -578,7 +581,7 @@ nav {
     /* box-shadow: #0090e4; */
     /* Changes to your red accent color on hover */
     /* transform: translateY(-4px); */
-    border-color: var(--border-red);
+    border-color: var(--purple);
 }
 
 .profile-card:hover .profile-glow {
@@ -603,7 +606,7 @@ nav {
     height: 78px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--border-blue);
+    border: 2px solid var(--purple);
 }
 
 .status-badge {
@@ -858,7 +861,7 @@ nav {
 }
 
 .inner-card-btn:hover {
-    background-color: var(--red);
+    background-color: var(--purple-dark);
 
 }
 
@@ -878,8 +881,8 @@ nav {
 
 /* Join Server Unique Accent */
 .join-server-btn {
-    background: var(--blue);
-    border: 1px solid var(--border-blue);
+    background: var(--purple-bright);
+    border: 1px solid var(--purple-dark);
     color: #ffffff;
     transition: all 1s var(--ease);
 }

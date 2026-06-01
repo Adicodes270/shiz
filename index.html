@@ -9,6 +9,7 @@
     content="Shiz Portfolio - Showcasing the best Discord servers owned by Shiz, including Madara's server with 1.4k members and 100+ online always. Join now to experience the ultimate Discord community!">
   <link rel="icon" type="image/x-icon" href="assets/minato.gif">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
   <style>
     *,
     *::before,
@@ -47,7 +48,7 @@
     .radar span {
       position: absolute;
       border-radius: 50%;
-      border: 1.5px solid var(--blue);
+      border: 1.5px solid var(--purple);
       opacity: 0;
       animation: radarRing 3s ease-out infinite;
     }
@@ -61,7 +62,7 @@
     .radar span:nth-child(2) {
       width: 120px;
       height: 120px;
-      border-color: #db1717;
+      border-color: var(--grey);
       animation-delay: 0.75s;
     }
 
@@ -74,7 +75,7 @@
     .radar span:nth-child(4) {
       width: 120px;
       height: 120px;
-      border-color: #db1717;
+      border-color: var(--grey);
       animation-delay: 2.25s;
     }
 
@@ -97,7 +98,7 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+      background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
       opacity: 0.3;
       animation: scan 3s linear infinite;
       pointer-events: none;
@@ -135,12 +136,12 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(100px, 22vw, 240px);
       color: transparent;
-      -webkit-text-stroke: 2px var(--blue-bright);
+      -webkit-text-stroke: 2px var(--purple-bright);
       letter-spacing: 0.08em;
       line-height: 1;
       position: relative;
       animation: textReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
-      filter: drop-shadow(0 0 30px var(--blue)) drop-shadow(0 0 80px rgba(0, 150, 220, 0.4));
+      filter: drop-shadow(0 0 30px var(--purple)) drop-shadow(0 0 80px rgba(128, 0, 128, 0.4));
     }
 
     /* filled clone — content left empty so it inherits typewriter text */
@@ -148,7 +149,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      color: var(--blue-bright);
+      color: var(--purple-bright);
       -webkit-text-stroke: 0;
       opacity: 0.08;
     }
@@ -158,8 +159,8 @@
       content: '';
       position: absolute;
       inset: 0;
-      color: var(--blue-bright);
-      -webkit-text-stroke: 2px var(--blue-bright);
+      color: var(--purple-bright);
+      -webkit-text-stroke: 2px var(--purple-bright);
       opacity: 0;
       animation: glitch 4s ease-in-out 1.4s infinite;
       clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
@@ -169,7 +170,7 @@
       0% {
         opacity: 0;
         transform: scaleX(0.6) skewX(-8deg);
-        filter: drop-shadow(0 0 60px var(--blue-bright));
+        filter: drop-shadow(0 0 60px var(--purple-bright));
       }
 
       60% {
@@ -219,7 +220,7 @@
     .intro-text .cursor {
       display: inline-block;
       width: 3px;
-      background: var(--blue-bright);
+      background: var(--purple-bright);
       margin-left: 4px;
       animation: blink 0.7s infinite;
       vertical-align: baseline;
@@ -243,7 +244,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(14px, 2.5vw, 22px);
       letter-spacing: 0.5em;
-      color: var(--blue);
+      color: var(--purple);
       opacity: 0;
       margin-top: 8px;
       animation: fadeUp 0.6s ease 1.1s both;
@@ -277,9 +278,9 @@
     .loader-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+      background: linear-gradient(90deg, var(--purple), var(--purple-bright));
       border-radius: 999px;
-      box-shadow: 0 0 10px var(--blue-bright);
+      box-shadow: 0 0 10px var(--purple-bright);
       animation: load 2.2s cubic-bezier(0.4, 0, 0.2, 1) 1.5s both;
     }
 
@@ -335,6 +336,7 @@
 
   <div class="overlay-exit"></div>
 
+  
   <script>
     setTimeout(() => {
       sessionStorage.setItem('introSeen', 'true');
@@ -359,6 +361,8 @@
     }
 
     type();
+
+
   </script>
 </body>
 
