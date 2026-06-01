@@ -318,7 +318,8 @@ nav {
     padding: 22px 0;
     font-size: 28px;
     font-weight: 500;
-    color: rgb(223, 223, 223);;
+    color: rgb(223, 223, 223);
+    ;
     text-decoration: none;
     border-bottom: none;
     position: relative;
@@ -367,7 +368,7 @@ nav {
 .mobile-menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 9998;
     opacity: 0;
     pointer-events: none;
@@ -405,17 +406,15 @@ nav {
 }
 
 
- .profile-card {
+.profile-card {
     position: relative;
     width: 100%;
-
     max-width: 440px;
     background: linear-gradient(150deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 2%) 100%);
     border: 1px solid var(--border-blue);
     border-radius: 30px;
     padding: 24px;
-    text-align: left;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 10px 40px rgba(0, 80, 185, 0.7);
     transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
@@ -502,7 +501,7 @@ nav {
 
     background: #000;
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 2px 20px;
     border-radius: 4px;
 
@@ -520,7 +519,7 @@ nav {
 .profile-view {
     position: absolute;
     top: -29px;
-    left: 160px;
+    left: 220px;
 
     display: inline-flex;
     align-items: center;
@@ -537,15 +536,20 @@ nav {
     letter-spacing: 1.5px;
     text-transform: uppercase;
 
-    transform: translateY(10px);
+    transform: translateY(0);
     transition: all .25s ease;
     white-space: nowrap;
 }
 
 .profile-view-icon {
     fill: #c084fc;
+
     flex-shrink: 0;
 }
+
+/* #view-count {
+    color: var(--blue);
+} */
 
 /* #view-count {
     color: #c084fc;
@@ -581,6 +585,9 @@ nav {
 
 /* Bio Text */
 .profile-bio {
+    align-self: flex-start;
+    text-align: left;
+
     font-family: 'DM Sans', sans-serif;
     font-size: 14.5px;
     font-weight: 300;
@@ -681,10 +688,11 @@ nav {
     cursor: pointer;
 }
 
-.inner-card-btn:hover{
+.inner-card-btn:hover {
     background-color: var(--red);
 
 }
+
 /* Add Friend Unique Accent */
 .add-friend-btn {
     background: rgba(255, 255, 255, 0.04);
@@ -1137,6 +1145,11 @@ footer {
     .profile-card {
         max-width: 480px;
     }
+
+    .profile-view {
+        top: -29px;
+        left: 250px;
+    }
 }
 
 /* ── TABLET ── */
@@ -1266,6 +1279,13 @@ footer {
         border-right: none;
         border-bottom: 1px solid var(--border);
     }
+
+    .profile-view {
+        top: -29px;
+        left: 200px;
+    }
+
+
 }
 
 /* ── MOBILE SMALL ── */
@@ -1288,7 +1308,25 @@ footer {
         height: 36px;
     }
 
-    .profile-view
+    .profile-view {
+        top: -29px;
+        left: 160px;
+    }
+
+    .mobile-menu {
+        width: 70%;
+    }
+
+
+}
+
+@media (max-width: 320px) {
+
+
+    .profile-view {
+        top: -29px;
+        left: 120px;
+    }
 }
 
 /* ── TOUCH DEVICES — HIDE CURSOR ── */
@@ -1590,3 +1628,42 @@ footer {
     padding-top: 12px;
 }
 
+/* @media (max-width: 1024px) {
+    nav {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    nav {
+        width: 100%;
+    }
+
+} */
+
+/* @media (max-width: 900px) {
+    .commands-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 580px) {
+    .commands-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .commands-page {
+        padding: 80px 0 60px;
+    }
+
+    .faqs-page {
+        padding: 80px 0 60px;
+    }
+
+
+
+    .docs-page {
+        padding: 80px 0 60px;
+    }
+} */
