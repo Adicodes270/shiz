@@ -71,6 +71,7 @@ var SB_URL = 'https://dmtldpvckorygrprtfeg.supabase.co';
 var SB_KEY = 'sb_publishable_ZgCYBESMNzyJ9uTG52UBIw_kwRLV93k';
 
 function animateCount(el, target) {
+  el.textContent = '0';
   var start = 0;
   var step = target / 90;
   var timer = setInterval(function() {
