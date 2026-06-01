@@ -47,6 +47,58 @@ body::after {
     z-index: 9998;
 }
 
+
+.radar-pulse {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.radar-pulse span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    animation: bgRadar 4s ease-out infinite;
+}
+
+.radar-pulse span:nth-child(1) {
+    border: 2px solid var(--red);
+    animation-delay: 0s;
+}
+.radar-pulse span:nth-child(2) {
+    border: 2px solid var(--blue);
+    animation-delay: 1s;
+}
+.radar-pulse span:nth-child(3) {
+    border: 1.5px solid var(--red);
+    animation-delay: 2s;
+}
+.radar-pulse span:nth-child(4) {
+    border: 1.5px solid var(--blue);
+    animation-delay: 3s;
+}
+
+@keyframes bgRadar {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(6);
+        opacity: 0;
+    }
+}
+
 /* Container to hold our effects behind everything */
 body::before {
     content: '';
@@ -167,7 +219,9 @@ nav {
     gap: 10px;
 
     text-decoration: none;
+    transition: all 1s var(--ease);
 }
+
 
 .nav-brand img {
     width: 28px;
@@ -175,6 +229,7 @@ nav {
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid var(--border-blue);
+    transition: all 1s var(--ease);
 
 }
 
@@ -183,6 +238,17 @@ nav {
     font-size: 22px;
     letter-spacing: 2px;
     color: var(--text);
+    transition: all 1s var(--ease);
+}
+
+.nav-brand img:hover {
+    transform: translateY(-2px);
+    border: 1px solid var(--border-red);
+}
+
+.nav-brand-name:hover {
+    transform: translateY(-2px);
+    color: var(--blue);
 }
 
 .nav-links {
@@ -225,7 +291,7 @@ nav {
     color: var(--muted);
     border: 1px solid var(--border-blue);
     background: rgba(255, 255, 255, 0.03);
-    transition: all 0.22s var(--ease);
+    transition: all 1s var(--ease);
 }
 
 .nav-gh:hover {
@@ -245,7 +311,7 @@ nav {
     text-decoration: none;
     color: var(--bg);
     background: var(--blue);
-    transition: background 0.22s var(--ease);
+    transition: all 1s var(--ease);
 }
 
 .nav-add:hover {
@@ -419,6 +485,77 @@ nav {
     transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
+/* ── PROFILE EFFECTS ── */
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spinBorder {
+    to {
+        --angle: 360deg;
+    }
+}
+
+@keyframes pulseGlow {
+    from {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0.9;
+        transform: scale(1.35);
+    }
+}
+
+@keyframes badgeShimmer {
+
+    0%,
+    100% {
+        left: -60%
+    }
+
+    50% {
+        left: 120%
+    }
+}
+
+@keyframes floatParticle {
+    to {
+        transform: translateY(-120px);
+        opacity: 0;
+    }
+}
+
+@keyframes scanLine {
+    from {
+        background-position-y: 0;
+    }
+
+    to {
+        background-position-y: 100px;
+    }
+}
+
+
+
+.badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.badge::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    animation: badgeShimmer 3.5s ease-in-out infinite;
+}
 
 
 /* Subtle glow behind the card on hover */
@@ -473,12 +610,44 @@ nav {
     position: absolute;
     bottom: 12px;
     right: 5px;
-    width: 25px;
-    height: 25px;
-    background-color: hsl(142, 81%, 44%);
-    /* Clean online green */
-    border: 3px solid hsl(0, 0%, 91%);
+    width: 14px;
+    height: 14px;
+    background-color: rgb(74, 161, 74);
+    border: 2px solid var(--bg);
     border-radius: 50%;
+}
+
+/* .status-badge::before,
+.status-badge::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: radarPing 2s ease-out infinite;
+}
+
+.status-badge::after {
+    animation-delay: 1s;
+    background: var(--blue);
+}
+
+.status-badge::before {
+    background: var(--red);
+} */
+
+@keyframes radarPing {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3.5);
+        opacity: 0;
+    }
 }
 
 /* Identity Typography */
@@ -698,6 +867,7 @@ nav {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text);
+    transition: all 1s var(--ease);
 }
 
 .add-friend-btn:hover {
@@ -711,6 +881,7 @@ nav {
     background: var(--blue);
     border: 1px solid var(--border-blue);
     color: #ffffff;
+    transition: all 1s var(--ease);
 }
 
 .join-server-btn:hover {
