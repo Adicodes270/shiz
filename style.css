@@ -408,14 +408,12 @@ nav {
  .profile-card {
     position: relative;
     width: 100%;
-
     max-width: 440px;
     background: linear-gradient(150deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 2%) 100%);
     border: 1px solid var(--border-blue);
     border-radius: 30px;
     padding: 24px;
-    text-align: left;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 10px 40px rgba(0, 80, 185, 0.7);
     transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
@@ -537,7 +535,7 @@ nav {
     letter-spacing: 1.5px;
     text-transform: uppercase;
 
-    transform: translateY(10px);
+    transform: translateY(0);
     transition: all .25s ease;
     white-space: nowrap;
 }

@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.removeEventListener('click', playMusic);
       })
       .catch(error => {
-        console.log("Autoplay blocked. Waiting for user interaction to play music.");
+        console.log("Autoplay blocked.");
       });
   };
 
@@ -19,7 +19,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 
 document.querySelectorAll('.profile-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
@@ -36,14 +35,11 @@ document.querySelectorAll('.profile-card').forEach(card => {
   });
 });
 
-
-const cursor = document.querySelector('.custom-cursor');
-
-document.addEventListener('mousemove', (e) => {
+var cursor = document.querySelector('.custom-cursor');
+document.addEventListener('mousemove', function(e) {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
-
 
 var navToggle = document.getElementById('nav-toggle');
 var mobileMenu = document.getElementById('mobile-menu');
@@ -51,76 +47,70 @@ var mobileOverlay = document.getElementById('mobile-overlay');
 var mobileClose = document.querySelector('.nav-close');
 
 function openMenu() {
-  mobileMenu.classList.add('open');
-  mobileOverlay.classList.add('open');
+  if(mobileMenu) mobileMenu.classList.add('open');
+  if(mobileOverlay) mobileOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeMenu() {
-  mobileMenu.classList.remove('open');
-  mobileOverlay.classList.remove('open');
+  if(mobileMenu) mobileMenu.classList.remove('open');
+  if(mobileOverlay) mobileOverlay.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-navToggle.addEventListener('click', openMenu);
-mobileClose.addEventListener('click', closeMenu);
-mobileOverlay.addEventListener('click', closeMenu);
+if(navToggle) navToggle.addEventListener('click', openMenu);
+if(mobileClose) mobileClose.addEventListener('click', closeMenu);
+if(mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
 
 document.querySelectorAll('.mobile-menu a').forEach(function(a) {
   a.addEventListener('click', closeMenu);
 });
 
+// ── VIEW COUNTER ──
+var SB_URL = 'https://dmtldpvckorygrprtfeg.supabase.co';
+var SB_KEY = 'sb_publishable_ZgCYBESMNzyJ9uTG52UBIw_kwRLV93k';
 
-// ── REAL VIEW COUNTER ──
-const SUPABASE_URL = 'https://dmtldpvckorygrprtfeg.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_ZgCYBESMNzyJ9uTG52UBIw_kwRLV93k';
-
-async function getAndUpdateViews() {
-  try {
-    // Get current count
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/views?select=count&id=eq.1`, {
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
-      }
-    });
-    const data = await res.json();
-    const currentViews = data[0].count;
-
-    // Increment by 1
-    await fetch(`${SUPABASE_URL}/rest/v1/views?id=eq.1`, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({ count: currentViews + 1 })
-    });
-
-    // Animate counter from 0 to current views
-    const viewEl = document.getElementById('view-count');
-    if (viewEl) {
-      let start = 0;
-      const target = currentViews + 1;
-      const duration = 1500;
-      const step = target / (duration / 16);
-      const timer = setInterval(() => {
-        start += step;
-        if (start >= target) {
-          viewEl.textContent = target;
-          clearInterval(timer);
-        } else {
-          viewEl.textContent = Math.floor(start);
-        }
-      }, 16);
+function animateCount(el, target) {
+  var start = 0;
+  var step = target / 90;
+  var timer = setInterval(function() {
+    start += step;
+    if (start >= target) {
+      el.textContent = target;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(start);
     }
-  } catch (err) {
-    console.error('View counter error:', err);
-    const viewEl = document.getElementById('view-count');
-    if (viewEl) viewEl.textContent = '150';
-  }
+  }, 16);
 }
 
-getAndUpdateViews();
+fetch(SB_URL + '/rest/v1/views?select=count&id=eq.1', {
+  headers: {
+    'apikey': SB_KEY,
+    'Authorization': 'Bearer ' + SB_KEY
+  }
+})
+.then(function(r) { return r.json(); })
+.then(function(d) {
+  var current = d[0].count;
+  var next = current + 1;
+
+  fetch(SB_URL + '/rest/v1/views?id=eq.1', {
+    method: 'PATCH',
+    headers: {
+      'apikey': SB_KEY,
+      'Authorization': 'Bearer ' + SB_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({ count: next })
+  });
+
+  var el = document.getElementById('view-count');
+  if (el) animateCount(el, next);
+})
+.catch(function(err) {
+  console.error(err);
+  var el = document.getElementById('view-count');
+  if (el) el.textContent = '150';
+});
