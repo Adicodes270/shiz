@@ -116,3 +116,69 @@ document.querySelectorAll('.mobile-menu a').forEach(function (a) {
   a.addEventListener('click', closeMenu);
 });
 
+
+gsap.from(".profile-card", {
+  duration: 1.5,
+  marginTop: "100px",              
+  opacity: 0,         
+  ease: "power3.out", 
+  delay: 0.5          // Give the page just a split second to settle
+});
+
+// 2. Cascade entrance for the custom badges inside the card
+gsap.from(".profile-badges .badge", {
+  duration: 0.8,
+  scale: 0.2,          // Start slightly smaller
+  opacity: 0,
+  ease: "back.out(1.5)", // Gives them a subtle, satisfying "pop" effect
+  stagger: 0.5,       // Animates them one after another
+  delay: 0.6           // Waits for the main card to finish dropping in
+});
+
+gsap.from(".profile-title, .profile-subtitle", {
+  duration: 1.5,
+  y: 50,              // Start slightly below
+  opacity: 0,
+  ease: "power2.out",
+  delay: 0.8          // Waits for the badges to finish popping in
+});
+
+gsap.from(".profile-bio", {
+  duration: 1,
+  x: -100,
+  opacity: 0,
+  ease: "power2.out",
+  delay: 1.0          // Waits for the title and subtitle to finish sliding in
+})
+
+gsap.from(".inner-card", {
+  duration: 2,
+  scale: 0.5,
+  opacity: 0,
+  ease: "power2.out",
+  delay: 1.2          // Waits for the bio to finish sliding in
+})
+
+gsap.from(".profile-avatar", {
+  duration: 1.5,
+  scale: 0.5,
+  opacity: 0,
+  ease: "back.out(1.5)",
+  delay: 1.4          // Waits for the inner card to finish scaling in
+})
+
+gsap.from(".status-badge", {
+  duration: 1.5,
+  scale: 0.5,
+  opacity: 0,
+  ease: "back.out(1.5)",
+  delay: 1.4          // Waits for the inner card to finish scaling in
+})
+
+gsap.from("nav", {
+  duration: 1,
+  y: -100,
+  opacity: 0,
+  ease: "power2.out",
+  delay: 0.5
+});
