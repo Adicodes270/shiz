@@ -21,8 +21,216 @@
 
 <body>
 
+    <div class="custom-cursor"></div>
+    <audio id="bg-music" src="assets/legacy.mp3" preload="auto"></audio>
+    <nav>
+        <div class="wrap">
 
-    
+
+            <div class="nav-inner">
+                <a class="nav-brand" href="#">
+                    <img src="assets/minato.gif" alt="GRAVE">
+                    <span class="nav-brand-name">OWNED BY SHIZ</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="main.html" class="active">Home</a></li>
+                    <li><a href="#servers">Servers</a></li>
+                    <li><a href="#onsale">On Sale</a></li>
+                    <li><a href="#events">Events</a></li>
+                </ul>
+                <div class="nav-end">
+                    <a class="nav-gh" href="https://discord.com/users/172108151024254976" target="_blank">
+                        Discord Profile
+                    </a>
+                    <a class="nav-add" href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="6" x2="20" y2="6" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="18" x2="20" y2="18" />
+                    </svg>
+                </button>
+
+
+                <!-- <button class="nav-close" id="nav-close" aria-label="Menu">
+          <i class="fa-solid fa-x"></i>
+        </button> -->
+
+
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+                <button class="nav-close" id="nav-close" aria-label="Menu">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+                <a href="main.html">Home</a>
+                <a href="#servers">Servers</a>
+                <a href="#sale">On Sale</a>
+                <a href="#events">Events</a>
+                <a href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="server-cards-container">
+
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/madara.gif" alt="Madara" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Madara</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/inmadara" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/vegeta.webp" alt="Vegeta" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Vegeta</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/vegeta" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/wistoria.webp" alt="Wistoria" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Wistoria</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/wistoria" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/kuroko.gif" alt="Kuroko" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Kuroko</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/kuroko" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/roger.webp" alt="Roger" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Roger</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/roger" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/kisuke.webp" alt="Kisuke" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Kisuke</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/kisuke" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <div class="server-card">
+                <div class="server-card-header">
+                    <img src="assets/jugram.gif" alt="Jugram" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Jugram</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc">100+ online always</h2>
+                            <h4 class="server-card-desc">1.4k members</h2>
+                    </div>
+                </div>
+                <a href="https://discord.gg/jugram" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            
+
+         
+
+
+            
+
+
+
+
+
+    </section>
+
     <script src="script.js"></script>
 </body>
 
