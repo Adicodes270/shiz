@@ -1,23 +1,25 @@
 window.addEventListener('DOMContentLoaded', () => {
   const bgMusic = document.getElementById('bg-music');
 
-  const playMusic = () => {
-    bgMusic.play()
-      .then(() => {
-        document.removeEventListener('click', playMusic);
-      })
-      .catch(error => {
-        console.log("Autoplay blocked.");
-      });
-  };
+  if (bgMusic) {
+    const playMusic = () => {
+      bgMusic.play()
+        .then(() => {
+          document.removeEventListener('click', playMusic);
+        })
+        .catch(() => {
+          console.log("Autoplay blocked.");
+        });
+    };
 
-  playMusic();
+    playMusic();
 
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('nav')) {
-      playMusic();
-    }
-  });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('nav')) {
+        playMusic();
+      }
+    });
+  }
 
   // ── VIEW COUNTER ──
   var SB_URL = 'https://dmtldpvckorygrprtfeg.supabase.co';
@@ -70,6 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// ── PROFILE CARD TILT ──
 document.querySelectorAll('.profile-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -85,12 +88,16 @@ document.querySelectorAll('.profile-card').forEach(card => {
   });
 });
 
+// ── CUSTOM CURSOR ──
 var cursor = document.querySelector('.custom-cursor');
-document.addEventListener('mousemove', function (e) {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
+if (cursor) {
+  document.addEventListener('mousemove', function (e) {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+}
 
+// ── MOBILE MENU ──
 var navToggle = document.getElementById('nav-toggle');
 var mobileMenu = document.getElementById('mobile-menu');
 var mobileOverlay = document.getElementById('mobile-overlay');
@@ -117,30 +124,31 @@ document.querySelectorAll('.mobile-menu a').forEach(function (a) {
 });
 
 
+// main.html animations
+
 gsap.from(".profile-card", {
   duration: 1.5,
-  marginTop: "100px",              
-  opacity: 0,         
-  ease: "power3.out", 
-  delay: 0.5          // Give the page just a split second to settle
+  marginTop: "100px",
+  opacity: 0,
+  ease: "power3.out",
+  delay: 0.5
 });
 
-// 2. Cascade entrance for the custom badges inside the card
 gsap.from(".profile-badges .badge", {
   duration: 0.8,
-  scale: 0.2,          // Start slightly smaller
+  scale: 0.2,
   opacity: 0,
-  ease: "back.out(1.5)", // Gives them a subtle, satisfying "pop" effect
-  stagger: 0.5,       // Animates them one after another
-  delay: 0.6           // Waits for the main card to finish dropping in
+  ease: "back.out(1.5)",
+  stagger: 0.5,
+  delay: 0.6
 });
 
 gsap.from(".profile-title, .profile-subtitle", {
   duration: 1.5,
-  y: 50,              // Start slightly below
+  y: 50,
   opacity: 0,
   ease: "power2.out",
-  delay: 0.8          // Waits for the badges to finish popping in
+  delay: 0.8
 });
 
 gsap.from(".profile-bio", {
@@ -148,38 +156,72 @@ gsap.from(".profile-bio", {
   x: -100,
   opacity: 0,
   ease: "power2.out",
-  delay: 1.0          // Waits for the title and subtitle to finish sliding in
-})
+  delay: 1.0
+});
 
 gsap.from(".inner-card", {
   duration: 2,
   scale: 0.5,
   opacity: 0,
   ease: "power2.out",
-  delay: 1.2          // Waits for the bio to finish sliding in
-})
+  delay: 1.2
+});
 
 gsap.from(".profile-avatar", {
   duration: 1.5,
   scale: 0.5,
   opacity: 0,
   ease: "back.out(1.5)",
-  delay: 1.4          // Waits for the inner card to finish scaling in
-})
+  delay: 1.4
+});
 
 gsap.from(".status-badge", {
   duration: 1.5,
   scale: 0.5,
   opacity: 0,
   ease: "back.out(1.5)",
-  delay: 1.4          // Waits for the inner card to finish scaling in
-})
+  delay: 1.4
+});
+
+
+
 
 gsap.from("nav", {
   duration: 1,
   y: -100,
   opacity: 0,
   ease: "power2.out",
+  delay: 0.3
+});
+
+
+
+
+gsap.from(".servers-page-title", {
+  duration: 1,
+  y: -50,
+  opacity: 0,
+  ease: "power2.out",
   delay: 0.5
+});
+
+
+
+gsap.from(".server-card", {
+  duration: 1.2,
+  scale: 1,                       
+  opacity: 0,          
+  ease: "power3.out",  
+  stagger: 0.5,        
+  delay: 0.3          
+});
+
+gsap.from(".discord-badges img", {
+  duration: 1.2,
+  scale: 0,
+  opacity: 0,
+  ease: "back.out(1.7)",
+  stagger: 0.15,
+  delay: 0.7
 });
 
