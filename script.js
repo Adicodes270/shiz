@@ -252,16 +252,46 @@ async function getLanyardData() {
     const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
     const jsonResult = await response.json();
 
-    console.log("Full JSON Response From Lanyard:", jsonResult);
-
     if (jsonResult.success) {
       const userData = jsonResult.data;
-      console.log("Extracted User Data:", userData);
-      console.log(`Username: ${userData.discord_user.username}`);
-      console.log(`Status: ${userData.discord_status}`);
+      
+      // 1. Extract dynamic data from the API response
+      const userId = userData.discord_user.id;
+      const avatarHash = userData.discord_user.avatar;
+      const decorationHash = userData.discord_user.avatar_decoration_data?.asset;
 
-      console.log(`Avatar: ${userData.discord_user.avatar}`);
-      console.log(`Decorations: ${userData.discord_user.avatar_decoration_data?.asset}`);
+      // 2. Build the dynamic Avatar URL
+      if (avatarHash) {
+        const isAnimated = avatarHash.startsWith("a_");
+        const fileExtension = isAnimated ? "gif" : "png";
+        const fullAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
+
+        // Update DOM elements dynamically
+        const avatarImageElement = document.querySelector(".profile-avatar");
+        const smallAvatarImageElement = document.getElementById("small-avatar");
+        const navBrandLogoElement = document.querySelector(".nav-brand-logo");
+
+        if (avatarImageElement) avatarImageElement.src = fullAvatarUrl;
+        if (smallAvatarImageElement) smallAvatarImageElement.src = fullAvatarUrl;
+        if (navBrandLogoElement) navBrandLogoElement.src = fullAvatarUrl;
+      }
+
+      // 3. Build the dynamic Decoration URL (if they have one)
+      const decorationImageElement = document.querySelector(".decoration");
+      if (decorationImageElement) {
+        if (decorationHash) {
+          const decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
+          decorationImageElement.src = decorationUrl;
+          decorationImageElement.style.display = "block"; // Show it if it was hidden
+        } else {
+          decorationImageElement.style.display = "none";  // Hide it if user has no decoration
+        }
+      }
+
+      // 4. (Optional) Update your status badge based on userData.discord_status
+      // e.g., 'online', 'idle', 'dnd', or 'offline'
+      console.log(`Live Status: ${userData.discord_status}`);
+
     } else {
       console.warn("API was reached but couldn't find user data.");
     }
@@ -271,37 +301,7 @@ async function getLanyardData() {
   }
 }
 
-
 getLanyardData();
-
-console.log("status after fetch:", status);
-
-const userId = "172108151024254976";
-const avatarHash = "a_6d03e07b6181e78dccda9fe0b4773377";
-
-const isAnimated = avatarHash.startsWith("a_");
-const fileExtension = isAnimated ? "gif" : "png";
-
-const fullAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
-console.log(fullAvatarUrl);
-
-const avatarImageElement = document.querySelector(".profile-avatar");
-const smallAvatarImageElement = document.getElementById("small-avatar");
-const navBrandLogoElement = document.querySelector(".nav-brand-logo");
-
-if (avatarImageElement) avatarImageElement.src = fullAvatarUrl;
-if (smallAvatarImageElement) smallAvatarImageElement.src = fullAvatarUrl;
-if (navBrandLogoElement) navBrandLogoElement.src = fullAvatarUrl;
-
-const decorationHash = "a_a7e2ab61c12d84c8b538573f28d58ae0";
-const decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
-console.log(decorationUrl);
-
-const decorationImageElement = document.querySelector(".decoration");
-if (decorationImageElement) {
-  decorationImageElement.src = decorationUrl;
-}
-
 
 
 
