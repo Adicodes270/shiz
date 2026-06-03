@@ -183,9 +183,6 @@ gsap.from(".status-badge", {
   delay: 1.4
 });
 
-
-
-
 gsap.from("nav", {
   duration: 1,
   y: -100,
@@ -194,9 +191,6 @@ gsap.from("nav", {
   delay: 0.3
 });
 
-
-
-
 gsap.from(".servers-page-title", {
   duration: 1,
   y: -50,
@@ -204,8 +198,6 @@ gsap.from(".servers-page-title", {
   ease: "power2.out",
   delay: 0.5
 });
-
-
 
 gsap.from(".server-card", {
   duration: 1.2,
@@ -225,67 +217,60 @@ gsap.from(".discord-badges img", {
   delay: 0.7
 });
 
+gsap.from(".decoration", {
+  duration: 1.5,
+  scale: 0.5,
+  opacity: 0,
+  ease: "back.out(1.5)",
+  delay: 1.6
+});
 
 const DISCORD_USER_ID = "172108151024254976"; 
 
-
-
-
 async function getLanyardData() {
   try {
-    // 1. Send the HTTP GET request to the Lanyard Endpoint
     const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
-    
-    // 2. Turn the raw network data stream into a readable JSON object
     const jsonResult = await response.json();
     
-    // 3. Inspect what the server sent back in your console
     console.log("Full JSON Response From Lanyard:", jsonResult);
     
-    // 4. Safely extract your specific data
     if (jsonResult.success) {
       const userData = jsonResult.data;
       console.log("Extracted User Data:", userData);
       console.log(`Username: ${userData.discord_user.username}`);
       console.log(`Status: ${userData.discord_status}`);
-      console.log(`Avatar: ${userData.discord_user.avatar}`) 
-      console.log(`Decorations: ${userData.discord_user.avatar_decoration_data.asset}`);
+      console.log(`Avatar: ${userData.discord_user.avatar}`);
+      console.log(`Decorations: ${userData.discord_user.avatar_decoration_data?.asset}`);
     } else {
       console.warn("API was reached but couldn't find user data.");
     }
 
   } catch (error) {
-    // Catch-all block for network crashes, typos in URL, or API downtime
     console.error("Network error fetching from Lanyard API:", error);
   }
 }
 
-// Fire the function
 getLanyardData();
   
 const userId = "172108151024254976"; 
 const avatarHash = "a_6d03e07b6181e78dccda9fe0b4773377";
 
-
 const isAnimated = avatarHash.startsWith("a_");
 const fileExtension = isAnimated ? "gif" : "png";
 
-
 const fullAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
-
 console.log(fullAvatarUrl); 
 
-
-
 const avatarImageElement = document.querySelector(".profile-avatar");
-if (avatarImageElement) {
-    avatarImageElement.src = fullAvatarUrl;
-}
+const smallAvatarImageElement = document.getElementById("small-avatar");
+const navBrandLogoElement = document.querySelector(".nav-brand-logo");
+
+if (avatarImageElement) avatarImageElement.src = fullAvatarUrl;
+if (smallAvatarImageElement) smallAvatarImageElement.src = fullAvatarUrl;
+if (navBrandLogoElement) navBrandLogoElement.src = fullAvatarUrl;
 
 const decorationHash = "a_a7e2ab61c12d84c8b538573f28d58ae0"; 
-
 const decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
-
 console.log(decorationUrl);
 
 const decorationImageElement = document.querySelector(".decoration");
@@ -294,3 +279,43 @@ if (decorationImageElement) {
 }
 
 
+async function trackServer(inviteCode) {
+    try {
+  
+        const card = document.querySelector(`.server-card[data-invite="${inviteCode}"]`);
+        if (!card) return; 
+
+        const res = await fetch(
+            `https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`
+        );
+        const data = await res.json();
+        
+        const totalMembers = data.approximate_member_count || 0;
+        const onlineMembers = data.approximate_presence_count || 0;
+        
+        
+        const onlineEl = card.querySelector(".stat-online");
+        const totalEl = card.querySelector(".stat-total");
+
+        if (onlineEl) {
+            onlineEl.innerHTML = `<span class="status-dot online"></span>Online: ${onlineMembers}`;
+        }
+        if (totalEl) {
+            totalEl.innerHTML = `<span class="status-dot members"></span>Total: ${totalMembers}`;
+        }
+
+        console.log(`Server: ${data.guild?.name || inviteCode} Loaded Successfully.`);
+    } catch (err) {
+        console.error(`Failed to fetch server stats for ${inviteCode}:`, err);
+    }
+}
+
+function trackAllServers() {
+    document.querySelectorAll('.server-card').forEach(card => {
+    const invite = card.getAttribute('data-invite');
+    if (invite) trackServer(invite);
+  });
+};
+
+setInterval(trackAllServers, 25000);
+trackAllServers();

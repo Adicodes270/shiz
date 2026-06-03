@@ -19,41 +19,6 @@
     <link rel="stylesheet" href="theme.css">
 
     <style>
-      
-       
-
-        /* .server-card:nth-child(1) {
-            animation-delay: 0.3s;
-        }
-
-        .server-card:nth-child(2) {
-            animation-delay: 0.38s;
-        }
-
-        .server-card:nth-child(3) {
-            animation-delay: 0.46s;
-        }
-
-        .server-card:nth-child(4) {
-            animation-delay: 0.54s;
-        }
-
-        .server-card:nth-child(5) {
-            animation-delay: 0.62s;
-        }
-
-        .server-card:nth-child(6) {
-            animation-delay: 0.70s;
-        }
-
-        .server-card:nth-child(7) {
-            animation-delay: 0.78s;
-        } */
-
-       
-
-
-
         /* ── PAGE TITLE ── */
         .servers-page-title {
             text-align: center;
@@ -103,13 +68,11 @@
             flex-direction: column;
             justify-content: space-between;
             gap: 16px;
-            transition: all 0.35s ease;
             box-shadow:
                 0 8px 24px rgba(0, 0, 0, 0.5),
                 0 0 20px rgba(128, 0, 255, 0.08);
             position: relative;
             overflow: hidden;
-            
             transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
@@ -144,7 +107,6 @@
         /* ── CARD HEADER ── */
         .server-card-header {
             display: flex;
-            /* THIS WAS THE MAIN FIX */
             align-items: flex-start;
             gap: 14px;
         }
@@ -182,7 +144,7 @@
             margin-top: 2px;
         }
 
-        .server-card-desc {
+        .server-card-desc, .inner-card-desc {
             font-family: 'DM Sans', sans-serif;
             font-size: 12px;
             font-weight: 300;
@@ -220,36 +182,22 @@
             transform: translateY(-1px);
         }
 
-
         /* ── CUSTOM CURSOR FIXES ── */
-        html,
-        body,
-        a,
-        button,
-        select,
-        input,
-        [role="button"] {
+        html, body, a, button, select, input, [role="button"] {
             cursor: none !important;
-            /* Hide native cursor everywhere, including links and buttons */
         }
 
         .custom-cursor {
             position: fixed;
-            /* Ensures cursor positions relative to view screen, not document */
             pointer-events: none;
-            /* Prevents the cursor element itself from triggering layout hangups/blocks */
             transform: translate(-50%, -50%);
-            /* Centers the custom element exactly on the tip coordinates */
             z-index: 99999;
-            /* Forces custom element above layout and interactive content */
             transition: transform 0.1s ease-out;
         }
 
-        /* Optional hover enlargement behavior to mimic active link context */
         .custom-cursor.hover {
             transform: translate(-50%, -50%) scale(1.6);
             background-color: rgba(168, 85, 247, 0.8);
-            /* Maintain matching purple themes */
         }
 
         /* ── STATUS BLINKING DOTS ── */
@@ -264,14 +212,12 @@
 
         .status-dot.online {
             background-color: #23a55a;
-            /* Discord Green */
             box-shadow: 0 0 8px #23a55a;
             animation: pulse-green 2s infinite;
         }
 
         .status-dot.members {
             background-color: #80848e;
-            /* Muted Grey */
         }
 
         @keyframes pulse-green {
@@ -279,12 +225,10 @@
                 transform: scale(0.95);
                 box-shadow: 0 0 0 0 rgba(35, 165, 90, 0.7);
             }
-
             70% {
                 transform: scale(1);
                 box-shadow: 0 0 0 6px rgba(35, 165, 90, 0);
             }
-
             100% {
                 transform: scale(0.95);
                 box-shadow: 0 0 0 0 rgba(35, 165, 90, 0);
@@ -307,14 +251,6 @@
 </head>
 
 <body>
-
-    <!-- Background radar pulse rings -->
-    <!-- <div class="radar-pulse">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div> -->
 
     <div class="custom-cursor"></div>
     <audio id="bg-music" src="assets/legacy.mp3" preload="auto"></audio>
@@ -360,23 +296,21 @@
         </div>
     </nav>
 
-    <!-- Page heading -->
     <div class="servers-page-title">
         <h1>Servers</h1>
         <p>All servers owned by Shiz</p>
     </div>
 
-    <!-- Cards grid -->
     <div class="server-cards-container">
 
-        <div class="server-card">
+        <div class="server-card" data-invite="inmadara">
             <div class="server-card-header">
                 <img src="assets/madara.gif" alt="Madara" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Madara</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="inner-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="inner-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/inmadara" target="_blank" class="server-card-btn join-server-btn">
@@ -389,14 +323,14 @@
             </a>
         </div>
 
-        <div class="server-card">
+        <div class="server-card" data-invite="Vegeta">
             <div class="server-card-header">
                 <img src="assets/vegeta.webp" alt="Vegeta" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Vegeta</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="inner-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="inner-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/vegeta" target="_blank" class="server-card-btn join-server-btn">
@@ -409,14 +343,14 @@
             </a>
         </div>
 
-        <div class="server-card">
+        <div class="server-card" data-invite="wistoria">
             <div class="server-card-header">
                 <img src="assets/wistoria.webp" alt="Wistoria" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Wistoria</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="inner-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="inner-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/wistoria" target="_blank" class="server-card-btn join-server-btn">
@@ -429,14 +363,14 @@
             </a>
         </div>
 
-        <div class="server-card">
+        <div class="server-card" data-invite="kuroko">
             <div class="server-card-header">
                 <img src="assets/kuroko.gif" alt="Kuroko" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Kuroko</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="server-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/kuroko" target="_blank" class="server-card-btn join-server-btn">
@@ -449,14 +383,14 @@
             </a>
         </div>
 
-        <div class="server-card">
+        <div class="server-card" data-invite="roger">
             <div class="server-card-header">
                 <img src="assets/roger.webp" alt="Roger" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Roger</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="server-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/roger" target="_blank" class="server-card-btn join-server-btn">
@@ -469,14 +403,14 @@
             </a>
         </div>
 
-        <div class="server-card">
+        <div class="server-card" data-invite="kisuke">
             <div class="server-card-header">
                 <img src="assets/kisuke.webp" alt="Kisuke" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Kisuke</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="server-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/kisuke" target="_blank" class="server-card-btn join-server-btn">
@@ -489,14 +423,14 @@
             </a>
         </div>
 
-        <div class="server-card">
+        <div class="server-card" data-invite="jugram">
             <div class="server-card-header">
                 <img src="assets/jugram.gif" alt="Jugram" class="server-card-thumb">
                 <div class="server-card-meta">
                     <h3 class="server-card-title">Jugram</h3>
                     <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc"><span class="status-dot online"></span>100+ online always</h4>
-                    <h4 class="server-card-desc"><span class="status-dot members"></span>1.4k members</h4>
+                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
+                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
                 </div>
             </div>
             <a href="https://discord.gg/jugram" target="_blank" class="server-card-btn join-server-btn">

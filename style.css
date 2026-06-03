@@ -687,9 +687,9 @@ nav {
 
 .avatar-container {
     position: relative;
-    width: 100px;
+    width: 90px;
     /* Match your desired layout size */
-    height: 100px;
+    height: 90px;
     display: inline-block;
 }
 
@@ -791,7 +791,7 @@ nav {
 .profile-view {
     position: absolute;
     top: -29px;
-    left: 220px;
+    left: 190px;
 
     display: inline-flex;
     align-items: center;
@@ -1529,7 +1529,7 @@ footer {
 
     .profile-view {
         top: -29px;
-        left: 250px;
+        left: 220px;
     }
 }
 
@@ -1612,10 +1612,10 @@ footer {
 
 /* ── MOBILE MEDIUM ── */
 @media (max-width: 480px) {
-    .profile-avatar {
+    /* .profile-avatar {
         width: 75px;
         height: 75px;
-    }
+    } */
 
     .profile-title {
         font-size: 28px;
@@ -1663,7 +1663,7 @@ footer {
 
     .profile-view {
         top: -29px;
-        left: 200px;
+        left: 170px;
     }
 
 
@@ -1691,7 +1691,7 @@ footer {
 
     .profile-view {
         top: -29px;
-        left: 160px;
+        left: 140px;
     }
 
     .mobile-menu {
@@ -1706,7 +1706,7 @@ footer {
 
     .profile-view {
         top: -29px;
-        left: 120px;
+        left: 80px;
     }
 }
 
