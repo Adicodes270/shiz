@@ -279,10 +279,12 @@ if (decorationImageElement) {
 }
 
 
+
+
 async function trackServer(inviteCode) {
     try {
-  
-        const card = document.querySelector(`.server-card[data-invite="${inviteCode}"]`);
+        
+        const card = document.querySelector(`.server-card[data-invite="${inviteCode}"], .inner-card[data-invite="${inviteCode}"]`);
         if (!card) return; 
 
         const res = await fetch(
@@ -293,7 +295,7 @@ async function trackServer(inviteCode) {
         const totalMembers = data.approximate_member_count || 0;
         const onlineMembers = data.approximate_presence_count || 0;
         
-        
+     
         const onlineEl = card.querySelector(".stat-online");
         const totalEl = card.querySelector(".stat-total");
 
@@ -310,12 +312,17 @@ async function trackServer(inviteCode) {
     }
 }
 
-function trackAllServers() {
-    document.querySelectorAll('.server-card').forEach(card => {
-    const invite = card.getAttribute('data-invite');
-    if (invite) trackServer(invite);
-  });
-};
 
-setInterval(trackAllServers, 25000);
+function trackAllServers() {
+    
+    document.querySelectorAll('[data-invite]').forEach(card => {
+        const invite = card.getAttribute('data-invite');
+        if (invite) trackServer(invite);
+    });
+}
+
+
 trackAllServers();
+
+
+setInterval(trackAllServers, 30000);
