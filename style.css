@@ -73,6 +73,15 @@ input,
     animation: pulse-green 2s infinite;
 }
 
+
+
+.status-dot.red {
+    background-color: #ff4d4d;
+    /* Red */
+    box-shadow: 0 0 8px #ff4d4d;
+    animation: pulse-red 2s infinite;
+}
+
 .status-dot.members {
     background-color: #80848e;
     /* Muted Grey */
@@ -318,6 +327,7 @@ nav {
     color: var(--purple);
 }
 
+
 .nav-links {
     display: flex;
     gap: 32px;
@@ -339,6 +349,17 @@ nav {
     background: rgba(255, 255, 255, 0.07);
     color: var(--text);
 }
+
+.nav-links a.active {
+    
+
+    /* background: rgba(255, 255, 255, 0.07); */
+    /* background : var(--mid-black); */
+    background : var(--purple);
+    border-radius: 16px;
+    color: var(--text);
+}
+
 
 .nav-end {
     display: flex;
@@ -2007,4 +2028,214 @@ footer {
     line-height: 1.6;
     border-top: 1px solid var(--border);
     padding-top: 12px;
+}
+
+/* ── ON SALE CARDS TITLE HEADINGS ── */
+.onsale-page-title {
+    text-align: center;
+    padding: 100px 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.onsale-page-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 7vw, 72px);
+    letter-spacing: 6px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--purple-bright);
+    filter: drop-shadow(0 0 20px var(--purple));
+}
+
+.onsale-page-title p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+/* ── ON SALE CARDS CONTAINER ── */
+.onsale-cards-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 80px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+/* ── INDIVIDUAL ON SALE CARD MODULE ── */
+.onsale-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(80, 0, 160, 0.10), rgba(0, 0, 0, 0.6));
+    border: 1px solid var(--purple-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(128, 0, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Top linear alignment shimmer line */
+.onsale-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
+    opacity: 0.4;
+}
+
+/* Elevate card animation sequence matching servers.html */
+.onsale-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--purple);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(128, 0, 255, 0.25);
+}
+
+/* Balance singular dangling cards if the rows ever break oddly */
+.onsale-card:last-child {
+    grid-column: span 1;
+}
+
+/* ── HEADER CONTENT LAYOUT ── */
+.onsale-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.onsale-card-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 2px solid var(--purple-dark);
+    flex-shrink: 0;
+}
+
+.onsale-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.onsale-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.onsale-card-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    margin-top: 2px;
+}
+
+.onsale-van-type{
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--purple);
+    margin-top: 2px;
+}
+
+.onsale-card-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+}
+
+/* ── ACTION INTERFACE SYSTEM (2 BUTTONS SIDE-BY-SIDE) ── */
+.onsale-actions-wrapper {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.onsale-card-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 8px;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* Check Server Accent Variation */
+.check-server-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--purple-dark);
+    color: var(--muted) !important;
+}
+
+.check-server-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--purple);
+    color: #fff !important;
+    transform: translateY(-1px);
+}
+
+/* Direct DM Offer Accent Variation matching join-server-btn */
+.dm-offer-btn {
+    background: var(--purple);
+    border: 1px solid var(--purple-bright);
+    color: #fff !important;
+}
+
+.dm-offer-btn:hover {
+    background: var(--purple-bright);
+    box-shadow: 0 4px 20px rgba(128, 0, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ── RESPONSIVE COLLAPSE CONSTRAINTS ── */
+@media (max-width: 992px) {
+    .onsale-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .onsale-cards-container {
+        grid-template-columns: 1fr;
+    }
+    .onsale-actions-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
 }

@@ -19,6 +19,8 @@ window.addEventListener('DOMContentLoaded', () => {
         playMusic();
       }
     });
+
+
   }
 
   // ── VIEW COUNTER ──
@@ -201,11 +203,11 @@ gsap.from(".servers-page-title", {
 
 gsap.from(".server-card", {
   duration: 1.2,
-  scale: 1,                       
-  opacity: 0,          
-  ease: "power3.out",  
-  stagger: 0.5,        
-  delay: 0.3          
+  scale: 1,
+  opacity: 0,
+  ease: "power3.out",
+  stagger: 0.5,
+  delay: 0.3
 });
 
 gsap.from(".discord-badges img", {
@@ -225,20 +227,39 @@ gsap.from(".decoration", {
   delay: 1.6
 });
 
-const DISCORD_USER_ID = "172108151024254976"; 
+gsap.from(".onsale-page-title", {
+  duration: 1,
+  y: -50,
+  opacity: 0,
+  ease: "power2.out",
+  delay: 0.5
+});
+
+gsap.from('.onsale-card', {
+  duration: 1.2,
+  scale: 1,
+  opacity: 0,
+  ease: "backout(1.7)",
+  stagger: 0.5,
+  delay: 0.3
+});
+
+
+const DISCORD_USER_ID = "172108151024254976";
 
 async function getLanyardData() {
   try {
     const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
     const jsonResult = await response.json();
-    
+
     console.log("Full JSON Response From Lanyard:", jsonResult);
-    
+
     if (jsonResult.success) {
       const userData = jsonResult.data;
       console.log("Extracted User Data:", userData);
       console.log(`Username: ${userData.discord_user.username}`);
       console.log(`Status: ${userData.discord_status}`);
+
       console.log(`Avatar: ${userData.discord_user.avatar}`);
       console.log(`Decorations: ${userData.discord_user.avatar_decoration_data?.asset}`);
     } else {
@@ -250,16 +271,19 @@ async function getLanyardData() {
   }
 }
 
+
 getLanyardData();
-  
-const userId = "172108151024254976"; 
+
+console.log("status after fetch:", status);
+
+const userId = "172108151024254976";
 const avatarHash = "a_6d03e07b6181e78dccda9fe0b4773377";
 
 const isAnimated = avatarHash.startsWith("a_");
 const fileExtension = isAnimated ? "gif" : "png";
 
 const fullAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
-console.log(fullAvatarUrl); 
+console.log(fullAvatarUrl);
 
 const avatarImageElement = document.querySelector(".profile-avatar");
 const smallAvatarImageElement = document.getElementById("small-avatar");
@@ -269,56 +293,56 @@ if (avatarImageElement) avatarImageElement.src = fullAvatarUrl;
 if (smallAvatarImageElement) smallAvatarImageElement.src = fullAvatarUrl;
 if (navBrandLogoElement) navBrandLogoElement.src = fullAvatarUrl;
 
-const decorationHash = "a_a7e2ab61c12d84c8b538573f28d58ae0"; 
+const decorationHash = "a_a7e2ab61c12d84c8b538573f28d58ae0";
 const decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
 console.log(decorationUrl);
 
 const decorationImageElement = document.querySelector(".decoration");
 if (decorationImageElement) {
-    decorationImageElement.src = decorationUrl;
+  decorationImageElement.src = decorationUrl;
 }
 
 
 
 
 async function trackServer(inviteCode) {
-    try {
-        
-        const card = document.querySelector(`.server-card[data-invite="${inviteCode}"], .inner-card[data-invite="${inviteCode}"]`);
-        if (!card) return; 
+  try {
 
-        const res = await fetch(
-            `https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`
-        );
-        const data = await res.json();
-        
-        const totalMembers = data.approximate_member_count || 0;
-        const onlineMembers = data.approximate_presence_count || 0;
-        
-     
-        const onlineEl = card.querySelector(".stat-online");
-        const totalEl = card.querySelector(".stat-total");
+    const card = document.querySelector(`.server-card[data-invite="${inviteCode}"], .inner-card[data-invite="${inviteCode}"]`);
+    if (!card) return;
 
-        if (onlineEl) {
-            onlineEl.innerHTML = `<span class="status-dot online"></span>Online: ${onlineMembers}`;
-        }
-        if (totalEl) {
-            totalEl.innerHTML = `<span class="status-dot members"></span>Total: ${totalMembers}`;
-        }
+    const res = await fetch(
+      `https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`
+    );
+    const data = await res.json();
 
-        console.log(`Server: ${data.guild?.name || inviteCode} Loaded Successfully.`);
-    } catch (err) {
-        console.error(`Failed to fetch server stats for ${inviteCode}:`, err);
+    const totalMembers = data.approximate_member_count || 0;
+    const onlineMembers = data.approximate_presence_count || 0;
+
+
+    const onlineEl = card.querySelector(".stat-online");
+    const totalEl = card.querySelector(".stat-total");
+
+    if (onlineEl) {
+      onlineEl.innerHTML = `<span class="status-dot online"></span>Online: ${onlineMembers}`;
     }
+    if (totalEl) {
+      totalEl.innerHTML = `<span class="status-dot members"></span>Total: ${totalMembers}`;
+    }
+
+    console.log(`Server: ${data.guild?.name || inviteCode} Loaded Successfully.`);
+  } catch (err) {
+    console.error(`Failed to fetch server stats for ${inviteCode}:`, err);
+  }
 }
 
 
 function trackAllServers() {
-    
-    document.querySelectorAll('[data-invite]').forEach(card => {
-        const invite = card.getAttribute('data-invite');
-        if (invite) trackServer(invite);
-    });
+
+  document.querySelectorAll('[data-invite]').forEach(card => {
+    const invite = card.getAttribute('data-invite');
+    if (invite) trackServer(invite);
+  });
 }
 
 
@@ -326,3 +350,4 @@ trackAllServers();
 
 
 setInterval(trackAllServers, 30000);
+
