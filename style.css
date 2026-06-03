@@ -2223,6 +2223,32 @@ footer {
     transform: translateY(-1px);
 }
 
+
+.events-page-title {
+    text-align: center;
+    padding: 100px 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.events-page-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 7vw, 72px);
+    letter-spacing: 6px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--purple-bright);
+    filter: drop-shadow(0 0 20px var(--purple));
+}
+
+.events-page-title p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
 /* ── RESPONSIVE COLLAPSE CONSTRAINTS ── */
 @media (max-width: 992px) {
     .onsale-cards-container {
