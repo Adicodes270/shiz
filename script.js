@@ -244,6 +244,14 @@ gsap.from('.onsale-card', {
   delay: 0.3
 });
 
+gsap.from(".events-page-title", {
+  duration: 1,
+  y: -50,
+  opacity: 0,
+  ease: "power2.out",
+  delay: 0.5
+});
+
 
 const DISCORD_USER_ID = "172108151024254976";
 
