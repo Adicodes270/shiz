@@ -136,14 +136,14 @@ gsap.from(".profile-card", {
   delay: 0.5
 });
 
-gsap.from(".profile-badges .badge", {
-  duration: 0.8,
-  scale: 0.2,
-  opacity: 0,
-  ease: "back.out(1.5)",
-  stagger: 0.5,
-  delay: 0.6
-});
+// gsap.from(".profile-badges .badge", {
+//   duration: 0.8,
+//   scale: 0.2,
+//   opacity: 0,
+//   ease: "back.out(1.5)",
+//   stagger: 0.5,
+//   delay: 0.6
+// });
 
 gsap.from(".profile-title, .profile-subtitle", {
   duration: 1.5,
@@ -151,22 +151,6 @@ gsap.from(".profile-title, .profile-subtitle", {
   opacity: 0,
   ease: "power2.out",
   delay: 0.8
-});
-
-gsap.from(".profile-bio", {
-  duration: 1,
-  x: -100,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 1.0
-});
-
-gsap.from(".inner-card", {
-  duration: 2,
-  scale: 0.5,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 1.2
 });
 
 gsap.from(".profile-avatar", {
@@ -177,12 +161,22 @@ gsap.from(".profile-avatar", {
   delay: 1.4
 });
 
-gsap.from(".status-badge", {
-  duration: 1.5,
-  scale: 0.5,
+gsap.from(".profile-heading-group " , {
+  duration: 1.2,
+  scale : 0.5,
+  opacity : 0,
+  ease : "power2.out" ,
+  delay : 0.4
+
+});
+
+gsap.from(".inner-stack-row", {
+  duration: 0.8,
+  y: 40,
   opacity: 0,
-  ease: "back.out(1.5)",
-  delay: 1.4
+  ease: "power3.out",
+  stagger: 0.5,
+  delay: 1.0
 });
 
 gsap.from("nav", {
@@ -316,7 +310,7 @@ getLanyardData();
 async function trackServer(inviteCode) {
   try {
 
-    const card = document.querySelector(`.server-card[data-invite="${inviteCode}"], .inner-card[data-invite="${inviteCode}"]`);
+    const card = document.querySelector(`.server-card[data-invite="${inviteCode}"], .inner-stack-row[data-invite="${inviteCode}"]`);
     if (!card) return;
 
     const res = await fetch(
