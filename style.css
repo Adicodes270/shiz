@@ -2517,6 +2517,15 @@ footer {
     margin-top: 8px;
 }
 
+.page-transition {
+    position: fixed;
+    inset: 0;
+    background: var(--purple);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    z-index: 999999;
+    pointer-events: none;
+}
 
 
 
