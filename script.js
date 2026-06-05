@@ -1,27 +1,43 @@
 window.addEventListener('DOMContentLoaded', () => {
+
+  // ── ENTRY WIPE REVEAL ──
+  // When main.html loads, the purple panel (#entry-wipe) covers the screen.
+  // We slide it away upward so the page is revealed smoothly.
+  const entryWipe = document.getElementById('entry-wipe');
+  if (entryWipe) {
+    gsap.to(entryWipe, {
+      scaleY: 0,
+      transformOrigin: 'top center',
+      duration: 0.7,
+      ease: 'power3.inOut',
+      delay: 0.1,
+      onComplete: () => {
+        entryWipe.style.display = 'none'; // remove from paint tree after done
+      }
+    });
+  }
+
+  // ── MUSIC ──
   const bgMusic = document.getElementById('bg-music');
- 
+
   if (bgMusic) {
- 
     const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
     const wasMuted = sessionStorage.getItem('musicMuted') === 'true';
- 
+
     bgMusic.currentTime = savedTime;
     bgMusic.muted = wasMuted;
- 
-    
+
     setInterval(() => {
       if (!bgMusic.paused) {
         sessionStorage.setItem('musicTime', bgMusic.currentTime);
       }
     }, 1000);
- 
-    
+
     window.addEventListener('beforeunload', () => {
       sessionStorage.setItem('musicTime', bgMusic.currentTime);
       sessionStorage.setItem('musicMuted', bgMusic.muted);
     });
- 
+
     const playMusic = () => {
       bgMusic.play()
         .then(() => {
@@ -32,9 +48,8 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-
     playMusic();
-      document.addEventListener('click', function (e) {
+    document.addEventListener('click', function (e) {
       if (!e.target.closest('nav')) {
         playMusic();
       }
@@ -90,6 +105,7 @@ window.addEventListener('DOMContentLoaded', () => {
       var el = document.getElementById('view-count');
       if (el) el.textContent = '150';
     });
+
 });
 
 // ── PROFILE CARD TILT ──
@@ -144,7 +160,7 @@ document.querySelectorAll('.mobile-menu a').forEach(function (a) {
 });
 
 
-// main.html animations
+// ── GSAP PAGE ANIMATIONS ──
 
 gsap.from(".profile-card", {
   duration: 1.5,
@@ -153,15 +169,6 @@ gsap.from(".profile-card", {
   ease: "power3.out",
   delay: 0.5
 });
-
-// gsap.from(".profile-badges .badge", {
-//   duration: 0.8,
-//   scale: 0.2,
-//   opacity: 0,
-//   ease: "back.out(1.5)",
-//   stagger: 0.5,
-//   delay: 0.6
-// });
 
 gsap.from(".profile-title, .profile-subtitle", {
   duration: 1.5,
@@ -179,13 +186,12 @@ gsap.from(".profile-avatar", {
   delay: 1.4
 });
 
-gsap.from(".profile-heading-group " , {
+gsap.from(".profile-heading-group", {
   duration: 1.2,
-  scale : 0.5,
-  opacity : 0,
-  ease : "power2.out" ,
-  delay : 0.4
-
+  scale: 0.5,
+  opacity: 0,
+  ease: "power2.out",
+  delay: 0.4
 });
 
 gsap.from(".inner-stack-row", {
@@ -265,6 +271,7 @@ gsap.from(".events-page-title", {
 });
 
 
+// ── LANYARD (DISCORD AVATAR + DECORATION) ──
 const DISCORD_USER_ID = "172108151024254976";
 
 async function getLanyardData() {
@@ -274,19 +281,16 @@ async function getLanyardData() {
 
     if (jsonResult.success) {
       const userData = jsonResult.data;
-      
-      // 1. Extract dynamic data from the API response
+
       const userId = userData.discord_user.id;
       const avatarHash = userData.discord_user.avatar;
       const decorationHash = userData.discord_user.avatar_decoration_data?.asset;
 
-      // 2. Build the dynamic Avatar URL
       if (avatarHash) {
         const isAnimated = avatarHash.startsWith("a_");
         const fileExtension = isAnimated ? "gif" : "png";
         const fullAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
 
-        // Update DOM elements dynamically
         const avatarImageElement = document.querySelector(".profile-avatar");
         const smallAvatarImageElement = document.getElementById("small-avatar");
         const navBrandLogoElement = document.querySelector(".nav-brand-logo");
@@ -296,20 +300,17 @@ async function getLanyardData() {
         if (navBrandLogoElement) navBrandLogoElement.src = fullAvatarUrl;
       }
 
-      // 3. Build the dynamic Decoration URL (if they have one)
       const decorationImageElement = document.querySelector(".decoration");
       if (decorationImageElement) {
         if (decorationHash) {
           const decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
           decorationImageElement.src = decorationUrl;
-          decorationImageElement.style.display = "block"; // Show it if it was hidden
+          decorationImageElement.style.display = "block";
         } else {
-          decorationImageElement.style.display = "none";  // Hide it if user has no decoration
+          decorationImageElement.style.display = "none";
         }
       }
 
-      // 4. (Optional) Update your status badge based on userData.discord_status
-      // e.g., 'online', 'idle', 'dnd', or 'offline'
       console.log(`Live Status: ${userData.discord_status}`);
 
     } else {
@@ -324,21 +325,17 @@ async function getLanyardData() {
 getLanyardData();
 
 
-
+// ── SERVER MEMBER TRACKER ──
 async function trackServer(inviteCode) {
   try {
-
     const card = document.querySelector(`.server-card[data-invite="${inviteCode}"], .inner-stack-row[data-invite="${inviteCode}"]`);
     if (!card) return;
 
-    const res = await fetch(
-      `https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`
-    );
+    const res = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
     const data = await res.json();
 
     const totalMembers = data.approximate_member_count || 0;
     const onlineMembers = data.approximate_presence_count || 0;
-
 
     const onlineEl = card.querySelector(".stat-online");
     const totalEl = card.querySelector(".stat-total");
@@ -356,46 +353,12 @@ async function trackServer(inviteCode) {
   }
 }
 
-
 function trackAllServers() {
-
   document.querySelectorAll('[data-invite]').forEach(card => {
     const invite = card.getAttribute('data-invite');
     if (invite) trackServer(invite);
   });
 }
 
-
 trackAllServers();
-
-
 setInterval(trackAllServers, 30000);
-
-if (window.barba) {
-  barba.init({
-    transitions: [{
-      async leave() {
-        await gsap.to(".page-transition", {
-          scaleY: 1,
-          duration: 0.7,
-          ease: "power2.inOut",
-          transformOrigin: "bottom"
-        });
-      },
-
-      async enter() {
-        gsap.set(".page-transition", {
-          transformOrigin: "top"
-        });
-
-        await gsap.to(".page-transition", {
-          scaleY: 0,
-          duration: 0.7,
-          ease: "power2.inOut"
-        });
-
-        window.scrollTo(0, 0);
-      }
-    }]
-  });
-}

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@Hokage</title>
   <meta name="description"
-    content="Shiz Portfolio - Showcasing the best Discord servers owned by Shiz, including Madara's server with 1.4k members and 100+ online always. Join now to experience the ultimate Discord community!">
+    content="Shiz Portfolio - Showcasing the best Discord servers owned by Shiz, including Zoldyck's server with 1.4k members and 100+ online always. Join now to experience the ultimate Discord community!">
   <link rel="icon" type="image/x-icon" href="assets/minato.gif">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,9 +19,28 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
+
+  <style>
+    /* ── ENTRY WIPE PANEL ── */
+    /* Sits on top of everything when the page first loads.
+       script.js will slide it away upward to reveal the page. */
+    #entry-wipe {
+      position: fixed;
+      inset: 0;
+      background: var(--purple, #6b00d4);
+      z-index: 99999;
+      transform: scaleY(1);
+      transform-origin: top center;
+      pointer-events: none;
+    }
+  </style>
 </head>
 
 <body>
+
+  <!-- Entry wipe panel — covers page on arrival, gets slid away by GSAP -->
+  <div id="entry-wipe"></div>
+
   <script>
     if (!sessionStorage.getItem('introSeen')) {
       window.location.href = 'index.html';
@@ -46,7 +65,7 @@
         </ul>
         <div class="nav-end">
           <a class="nav-gh" href="https://discord.com/users/172108151024254976" target="_blank">Discord Profile</a>
-          <a class="nav-add" href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+          <a class="nav-add" href="https://discord.gg/zoldyck" target="_blank">Server Link</a>
         </div>
         <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -65,7 +84,7 @@
         <a href="servers.html">Servers</a>
         <a href="onsale.html">On Sale</a>
         <a href="events.html">Events</a>
-        <a href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+        <a href="https://discord.gg/zoldyck" target="_blank">Server Link</a>
       </div>
     </div>
   </nav>
@@ -83,7 +102,7 @@
         <span id="view-count">...</span>
       </div>
 
-      <!-- Top Text Layout Header matched with shizimg.jpg -->
+      <!-- Top Text Layout Header -->
       <div class="profile-heading-group">
         <h1 class="main-card-title">SHIZ</h1>
         <p class="main-card-subtitle">Flawless</p>
@@ -107,9 +126,7 @@
         </div>
       </div>
 
-
       <div class="inner-cards-stack">
-
 
         <div class="inner-stack-row">
           <div class="row-left-content">
@@ -124,7 +141,6 @@
           </a>
         </div>
 
-
         <div class="inner-stack-row">
           <div class="row-left-content">
             <img src="assets/hokage.jpg" alt="shiz" class="row-thumb">
@@ -138,19 +154,18 @@
           </a>
         </div>
 
-
-        <div class="inner-stack-row" data-invite="inmadara">
+        <div class="inner-stack-row" data-invite="zoldyck">
           <div class="row-left-content">
-            <img src="assets/madara.gif" alt="Madara" class="row-thumb">
+            <img src="assets/zoldyck.gif" alt="Zoldyck" class="row-thumb">
             <div class="row-meta">
-              <h3 class="row-title">/madara</h3>
+              <h3 class="row-title">/zoldyck</h3>
               <div class="row-stats-group">
                 <span class="stat-online"><span class="status-dot online"></span>61 Online</span>
                 <span class="stat-total"><span class="status-dot members"></span>726 Members</span>
               </div>
             </div>
           </div>
-          <a href="https://discord.gg/inmadara" target="_blank" class="row-action-btn join-server-btn">
+          <a href="https://discord.gg/zoldyck" target="_blank" class="row-action-btn join-server-btn">
             Join
           </a>
         </div>
@@ -160,7 +175,7 @@
   </section>
 
   <div class="divider"></div>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"
     integrity="sha512-qF6akR/fsZAB4Co1QDDnUXWnaQseLGXoniuSuSlPQK6+aWhlMZcHzkasCSlnWoe+TJuudlka1/IQ01Dnhgq95g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
