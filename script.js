@@ -1,128 +1,39 @@
-window.addEventListener('DOMContentLoaded', () => {
+// ══════════════════════════════════════════════════════════════
+//  PERSISTENT SETUP — runs once on initial page load only.
+//  These are things that live outside the Barba container
+//  (music, custom cursor, mobile menu) and must NOT be
+//  re-initialised on every transition.
+// ══════════════════════════════════════════════════════════════
 
-  // ── ENTRY WIPE REVEAL ──
-  // When main.html loads, the purple panel (#entry-wipe) covers the screen.
-  // We slide it away upward so the page is revealed smoothly.
-  const entryWipe = document.getElementById('entry-wipe');
-  if (entryWipe) {
-    gsap.to(entryWipe, {
-      scaleY: 0,
-      transformOrigin: 'top center',
-      duration: 0.7,
-      ease: 'power3.inOut',
-      delay: 0.1,
-      onComplete: () => {
-        entryWipe.style.display = 'none'; // remove from paint tree after done
-      }
-    });
-  }
+// ── MUSIC ──
+const bgMusic = document.getElementById('bg-music');
+if (bgMusic) {
+  const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
+  const wasMuted = sessionStorage.getItem('musicMuted') === 'true';
 
-  // ── MUSIC ──
-  const bgMusic = document.getElementById('bg-music');
+  bgMusic.currentTime = savedTime;
+  bgMusic.muted = wasMuted;
 
-  if (bgMusic) {
-    const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
-    const wasMuted = sessionStorage.getItem('musicMuted') === 'true';
+  setInterval(() => {
+    if (!bgMusic.paused) sessionStorage.setItem('musicTime', bgMusic.currentTime);
+  }, 1000);
 
-    bgMusic.currentTime = savedTime;
-    bgMusic.muted = wasMuted;
-
-    setInterval(() => {
-      if (!bgMusic.paused) {
-        sessionStorage.setItem('musicTime', bgMusic.currentTime);
-      }
-    }, 1000);
-
-    window.addEventListener('beforeunload', () => {
-      sessionStorage.setItem('musicTime', bgMusic.currentTime);
-      sessionStorage.setItem('musicMuted', bgMusic.muted);
-    });
-
-    const playMusic = () => {
-      bgMusic.play()
-        .then(() => {
-          document.removeEventListener('click', playMusic);
-        })
-        .catch(() => {
-          console.log("Autoplay blocked — waiting for click.");
-        });
-    };
-
-    playMusic();
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('nav')) {
-        playMusic();
-      }
-    });
-  }
-
-  // ── VIEW COUNTER ──
-  var SB_URL = 'https://dmtldpvckorygrprtfeg.supabase.co';
-  var SB_KEY = 'sb_publishable_ZgCYBESMNzyJ9uTG52UBIw_kwRLV93k';
-
-  function animateCount(el, target) {
-    el.textContent = '0';
-    var start = 0;
-    var step = target / 90;
-    var timer = setInterval(function () {
-      start += step;
-      if (start >= target) {
-        el.textContent = target;
-        clearInterval(timer);
-      } else {
-        el.textContent = Math.floor(start);
-      }
-    }, 10);
-  }
-
-  fetch(SB_URL + '/rest/v1/views?select=count&id=eq.1', {
-    headers: {
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY
-    }
-  })
-    .then(function (r) { return r.json(); })
-    .then(function (d) {
-      var current = d[0].count;
-      var next = current + 1;
-
-      fetch(SB_URL + '/rest/v1/views?id=eq.1', {
-        method: 'PATCH',
-        headers: {
-          'apikey': SB_KEY,
-          'Authorization': 'Bearer ' + SB_KEY,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({ count: next })
-      });
-
-      var el = document.getElementById('view-count');
-      if (el) animateCount(el, next);
-    })
-    .catch(function (err) {
-      console.error(err);
-      var el = document.getElementById('view-count');
-      if (el) el.textContent = '150';
-    });
-
-});
-
-// ── PROFILE CARD TILT ──
-document.querySelectorAll('.profile-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    const rotateX = y / rect.height * 25;
-    const rotateY = -x / rect.width * 25;
-    card.style.transform = `perspective(500px) scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('musicTime', bgMusic.currentTime);
+    sessionStorage.setItem('musicMuted', bgMusic.muted);
   });
 
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(500px) scale(1) rotateX(0deg) rotateY(0deg)';
+  const playMusic = () => {
+    bgMusic.play()
+      .then(() => document.removeEventListener('click', playMusic))
+      .catch(() => console.log('Autoplay blocked — waiting for click.'));
+  };
+
+  playMusic();
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav')) playMusic();
   });
-});
+}
 
 // ── CUSTOM CURSOR ──
 var cursor = document.querySelector('.custom-cursor');
@@ -144,7 +55,6 @@ function openMenu() {
   if (mobileOverlay) mobileOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeMenu() {
   if (mobileMenu) mobileMenu.classList.remove('open');
   if (mobileOverlay) mobileOverlay.classList.remove('open');
@@ -155,124 +65,124 @@ if (navToggle) navToggle.addEventListener('click', openMenu);
 if (mobileClose) mobileClose.addEventListener('click', closeMenu);
 if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
 
-document.querySelectorAll('.mobile-menu a').forEach(function (a) {
-  a.addEventListener('click', closeMenu);
-});
+// ── GSAP NAV ANIMATION (once) ──
+gsap.from('nav', { duration: 1, y: -100, opacity: 0, ease: 'power2.out', delay: 0.3 });
 
 
-// ── GSAP PAGE ANIMATIONS ──
+// ══════════════════════════════════════════════════════════════
+//  PER-PAGE INIT — called after every Barba transition so that
+//  page-specific logic (GSAP, Lanyard, server tracker, etc.)
+//  is wired up on the fresh container DOM.
+// ══════════════════════════════════════════════════════════════
 
-gsap.from(".profile-card", {
-  duration: 1.5,
-  marginTop: "100px",
-  opacity: 0,
-  ease: "power3.out",
-  delay: 0.5
-});
+function revealPageElements(namespace) {
+  const pageTargets = {
+    home: gsap.utils.toArray('.profile-card, .profile-heading-group, .profile-title, .profile-subtitle, .profile-avatar, .inner-stack-row'),
+    servers: gsap.utils.toArray('.servers-page-title, .server-card'),
+    onsale: gsap.utils.toArray('.onsale-page-title, .onsale-card'),
+    events: gsap.utils.toArray('.events-page-title')
+  };
 
-gsap.from(".profile-title, .profile-subtitle", {
-  duration: 1.5,
-  y: 50,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 0.8
-});
+  const targets = pageTargets[namespace] || [];
+  if (!targets.length) return null;
 
-gsap.from(".profile-avatar", {
-  duration: 1.5,
-  scale: 0.5,
-  opacity: 0,
-  ease: "back.out(1.5)",
-  delay: 1.4
-});
+  gsap.killTweensOf(targets);
+  gsap.set(targets, { autoAlpha: 0, visibility: 'hidden' });
 
-gsap.from(".profile-heading-group", {
-  duration: 1.2,
-  scale: 0.5,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 0.4
-});
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-gsap.from(".inner-stack-row", {
-  duration: 0.8,
-  y: 40,
-  opacity: 0,
-  ease: "power3.out",
-  stagger: 0.5,
-  delay: 1.0
-});
+  if (namespace === 'home') {
+    tl.fromTo('.profile-card', { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1 }, 0.2)
+      .fromTo('.profile-heading-group, .profile-title, .profile-subtitle', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 2 }, 0.5)
+      .fromTo('.profile-avatar', { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.9 }, 0.5)
+      .fromTo('.inner-stack-row', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.5 }, 1)
+      .fromTo('.discord-badges', { autoAlpha: 0, y: 30}, {autoAlpha: 1, y: 0, duration: 1, stagger: 0.5} , 0.5);
+  }
 
-gsap.from("nav", {
-  duration: 1,
-  y: -100,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 0.3
-});
+  if (namespace === 'servers') {
+    tl.fromTo('.servers-page-title', { autoAlpha: 0, y: -30 }, { autoAlpha: 1, y: 0, duration: 0.85 }, 0)
+      .fromTo('.server-card', { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.2, stagger: 0.5 }, 0.15);
+  }
 
-gsap.from(".servers-page-title", {
-  duration: 1,
-  y: -50,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 0.5
-});
+  if (namespace === 'onsale') {
+    tl.fromTo('.onsale-page-title', { autoAlpha: 0, y: -30 }, { autoAlpha: 1, y: 0, duration: 0.85 }, 0)
+      .fromTo('.onsale-card', { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.2, stagger: 0.5 }, 0.15);
+  }
 
-gsap.from(".server-card", {
-  duration: 1.2,
-  scale: 1,
-  opacity: 0,
-  ease: "power3.out",
-  stagger: 0.5,
-  delay: 0.3
-});
+  if (namespace === 'events') {
+    tl.fromTo('.events-page-title', { autoAlpha: 0, y: -30 }, { autoAlpha: 1, y: 0, duration: 0.85 }, 0);
+  }
 
-gsap.from(".discord-badges img", {
-  duration: 1.2,
-  scale: 0,
-  opacity: 0,
-  ease: "back.out(1.7)",
-  stagger: 0.15,
-  delay: 0.7
-});
+  return tl;
+}
 
-gsap.from(".decoration", {
-  duration: 1.5,
-  scale: 0.5,
-  opacity: 0,
-  ease: "back.out(1.5)",
-  delay: 1.6
-});
+function initPageAnimations(namespace) {
+  revealPageElements(namespace);
 
-gsap.from(".onsale-page-title", {
-  duration: 1,
-  y: -50,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 0.5
-});
+  // ── VIEW COUNTER (home page only) ──
+  if (namespace === 'home') {
+    var SB_URL = 'https://dmtldpvckorygrprtfeg.supabase.co';
+    var SB_KEY = 'sb_publishable_ZgCYBESMNzyJ9uTG52UBIw_kwRLV93k';
 
-gsap.from('.onsale-card', {
-  duration: 1.2,
-  scale: 1,
-  opacity: 0,
-  ease: "backout(1.7)",
-  stagger: 0.5,
-  delay: 0.3
-});
+    function animateCount(el, target) {
+      el.textContent = '0';
+      var start = 0, step = target / 90;
+      var timer = setInterval(function () {
+        start += step;
+        if (start >= target) { el.textContent = target; clearInterval(timer); }
+        else { el.textContent = Math.floor(start); }
+      }, 10);
+    }
 
-gsap.from(".events-page-title", {
-  duration: 1,
-  y: -50,
-  opacity: 0,
-  ease: "power2.out",
-  delay: 0.5
-});
+    fetch(SB_URL + '/rest/v1/views?select=count&id=eq.1', {
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+    })
+      .then(r => r.json())
+      .then(d => {
+        var next = d[0].count + 1;
+        fetch(SB_URL + '/rest/v1/views?id=eq.1', {
+          method: 'PATCH',
+          headers: {
+            'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+            'Content-Type': 'application/json', 'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ count: next })
+        });
+        var el = document.getElementById('view-count');
+        if (el) animateCount(el, next);
+      })
+      .catch(err => {
+        console.error(err);
+        var el = document.getElementById('view-count');
+        if (el) el.textContent = '150';
+      });
+  }
+
+  // ── PROFILE CARD TILT ──
+  document.querySelectorAll('.profile-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `perspective(500px) scale(1.05) rotateX(${y / rect.height * 25}deg) rotateY(${-x / rect.width * 25}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(500px) scale(1) rotateX(0deg) rotateY(0deg)';
+    });
+  });
+
+  // ── LANYARD ──
+  getLanyardData();
+
+  // ── SERVER MEMBER TRACKER ──
+  trackAllServers();
+}
 
 
-// ── LANYARD (DISCORD AVATAR + DECORATION) ──
-const DISCORD_USER_ID = "172108151024254976";
+// ══════════════════════════════════════════════════════════════
+//  LANYARD
+// ══════════════════════════════════════════════════════════════
+const DISCORD_USER_ID = '172108151024254976';
 
 async function getLanyardData() {
   try {
@@ -322,9 +232,6 @@ async function getLanyardData() {
   }
 }
 
-getLanyardData();
-
-
 // ── SERVER MEMBER TRACKER ──
 async function trackServer(inviteCode) {
   try {
@@ -360,5 +267,114 @@ function trackAllServers() {
   });
 }
 
-trackAllServers();
+
+// ══════════════════════════════════════════════════════════════
+//  BARBA JS — page transition orchestration
+//
+//  Transition sequence on navigation:
+//  1. leave     — instant (no fade-out; wipe will cover everything)
+//  2. beforeEnter — #page-wipe sweeps DOWN, covering the screen
+//  3. (Barba swaps the container DOM while screen is hidden)
+//  4. after     — #page-wipe sweeps UP, revealing the new page
+//               — then run page-specific animations
+// ══════════════════════════════════════════════════════════════
+
+const pageWipe = document.getElementById('page-wipe');
+
+barba.init({
+  prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
+
+  transitions: [
+    {
+      name: 'wipe',
+
+      leave(data) {
+        gsap.set(data.current.container.querySelectorAll('.gsap-hidden'), {
+          autoAlpha: 0,
+          visibility: 'hidden'
+        });
+        return Promise.resolve();
+      },
+
+      // Wipe sweeps DOWN to cover the screen before content swaps
+      beforeEnter(data) {
+        gsap.set(data.next.container.querySelectorAll('.gsap-hidden'), {
+          autoAlpha: 0,
+          visibility: 'hidden'
+        });
+        return gsap.to(pageWipe, {
+          scaleY: 1,
+          transformOrigin: 'top center',
+          duration: 0.45,
+          ease: 'power3.inOut'
+        });
+      },
+
+      // Content is already swapped by Barba; keep new container hidden under wipe
+      enter(data) {
+        gsap.set(data.next.container, { opacity: 1 });
+        gsap.set(data.next.container.querySelectorAll('.gsap-hidden'), { autoAlpha: 0, visibility: 'hidden' });
+        return Promise.resolve();
+        
+      },
+
+      // Wipe sweeps UP to reveal the new page, then run page animations
+      after(data) {
+        const namespace = data.next.namespace;
+
+        // Update active nav link
+        document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+          a.classList.remove('active');
+          const href = a.getAttribute('href');
+          if (href === `${namespace}.html` ||
+            (namespace === 'home' && href === 'main.html')) {
+            a.classList.add('active');
+          }
+        });
+
+        // Re-wire mobile menu close
+        document.querySelectorAll('.mobile-menu a').forEach(a => {
+          a.addEventListener('click', closeMenu);
+        });
+
+        // Reveal: wipe sweeps UP, then run page animations
+        return gsap.to(pageWipe, {
+          scaleY: 0,
+          transformOrigin: 'bottom center',
+          duration: 0.45,
+          ease: 'power3.inOut',
+          onComplete: () => initPageAnimations(namespace)
+        });
+      }
+    }
+  ]
+});
+
+// ── FIRST PAGE LOAD ──
+// On the very first load (coming from index.html wipe), the #entry-wipe
+// in main.html covers the screen. Reveal it, then run page animations.
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('[data-barba="container"]');
+  const namespace = container ? container.dataset.barbaNamespace : '';
+
+  // Handle the entry wipe on main.html first load
+  const entryWipe = document.getElementById('entry-wipe');
+  if (entryWipe) {
+    gsap.to(entryWipe, {
+      scaleY: 0,
+      transformOrigin: 'top center',
+      duration: 0.7,
+      ease: 'power3.inOut',
+      delay: 0.1,
+      onComplete: () => {
+        entryWipe.style.display = 'none';
+        initPageAnimations(namespace);
+      }
+    });
+  } else {
+    initPageAnimations(namespace);
+  }
+});
+
+// Keep refreshing server member counts every 30s regardless of page
 setInterval(trackAllServers, 30000);

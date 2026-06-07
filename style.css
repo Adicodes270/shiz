@@ -350,15 +350,6 @@ nav {
     color: var(--text);
 }
 
-.nav-links a.active {
-
-
-    /* background: rgba(255, 255, 255, 0.07); */
-    /* background : var(--mid-black); */
-    background: var(--purple);
-    border-radius: 16px;
-    color: var(--text);
-}
 
 
 .nav-end {
@@ -512,8 +503,10 @@ nav {
 }
 
 .mobile-menu a:hover {
-    color: var(--text);
+    color: var(--purple);
 }
+
+
 
 .mobile-menu.open {
     right: 0;
@@ -621,7 +614,7 @@ nav {
 }
 
 .profile-header-banner:hover {
-    border : 1px solid var(--white);
+    border: 1px solid var(--white);
 }
 
 /* Glass panel layer overlaid on top of your fetched banner image */
@@ -1298,7 +1291,13 @@ nav {
     font-size: 14px;
     font-weight: 600;
 }
-
+@media (min-width: 769px){
+    .nav-links a.active {
+        background: var(--purple);
+        border-radius: 16px;
+        color: var(--text);
+    }
+}
 @media (max-width: 1100px) {
     .server-cards-container {
         grid-template-columns: repeat(2, 1fr);
@@ -1949,7 +1948,7 @@ footer {
         object-fit: contain;
     }
 
-    
+
 
 
 
@@ -2561,5 +2560,264 @@ footer {
     .onsale-actions-wrapper {
         flex-direction: column;
         gap: 8px;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SERVERS PAGE
+══════════════════════════════════════════════════════════════ */
+
+/* ── PAGE TITLE ── */
+.servers-page-title {
+    text-align: center;
+    padding: 100px 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.servers-page-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 7vw, 72px);
+    letter-spacing: 6px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--purple-bright);
+    filter: drop-shadow(0 0 20px var(--purple));
+}
+
+.servers-page-title p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+/* ── SERVER CARDS CONTAINER ── */
+.server-cards-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 80px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── SERVER CARD ── */
+.server-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(80, 0, 160, 0.10), rgba(0, 0, 0, 0.6));
+    border: 1px solid var(--purple-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(128, 0, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.server-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
+    opacity: 0.4;
+}
+
+.server-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--purple);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(128, 0, 255, 0.25);
+}
+
+/* ── CARD HEADER ── */
+.server-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.server-card-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 2px solid var(--purple-dark);
+    flex-shrink: 0;
+}
+
+.server-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.server-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.server-card-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    margin-top: 2px;
+}
+
+.server-card-desc,
+.inner-card-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-top: 1px;
+}
+
+/* ── JOIN BUTTON ── */
+.server-card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+
+.join-server-btn {
+    background: var(--purple);
+    border: 1px solid var(--purple-bright);
+    color: #fff;
+}
+
+.join-server-btn:hover {
+    background: var(--purple-bright);
+    box-shadow: 0 4px 20px rgba(128, 0, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ── STATUS DOTS (shared, also used by servers page) ── */
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.status-dot.online {
+    background-color: #23a55a;
+    box-shadow: 0 0 8px #23a55a;
+    animation: pulse-green 2s infinite;
+}
+
+.status-dot.members {
+    background-color: #80848e;
+}
+
+.onsale-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 360px;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(35, 165, 90, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(35, 165, 90, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(35, 165, 90, 0);
+    }
+}
+
+/* ── EVENTS PAGE TITLE ── */
+.events-page-title {
+    text-align: center;
+    padding: 100px 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.events-page-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 7vw, 72px);
+    letter-spacing: 6px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--purple-bright);
+    filter: drop-shadow(0 0 20px var(--purple));
+}
+
+.events-page-title p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+/* ── GSAP HIDDEN STATE UTILITY ── */
+.gsap-hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* ── BARBA PAGE WIPE OVERLAY ── */
+#page-wipe {
+    position: fixed;
+    inset: 0;
+    background: var(--purple, #6b00d4);
+    z-index: 99999;
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    pointer-events: none;
+}
+
+/* ── RESPONSIVE SERVERS ── */
+@media (max-width: 900px) {
+    .server-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .server-cards-container {
+        grid-template-columns: 1fr;
     }
 }

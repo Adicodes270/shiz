@@ -20,65 +20,65 @@
 </head>
 
 <body>
+    <!-- ── PAGE WIPE: covers screen during transitions ── -->
+    <div id="page-wipe"></div>
+
     <div class="custom-cursor"></div>
-  <audio id="bg-music" src="assets/legacy.mp3" preload="auto"></audio>
-  <nav>
-    <div class="wrap">
+    <audio id="bg-music" src="assets/legacy.mp3" preload="auto"></audio>
 
-
-      <div class="nav-inner">
-        <a class="nav-brand" href="#">
-          <img src="assets/minato.gif" alt="shiz" class="nav-brand-logo">
-          <span class="nav-brand-name">@Zoldyck</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="main.html" >Home</a></li>
-          <li><a href="servers.html">Servers</a></li>
-          <li><a href="onsale.html">On Sale</a></li>
-          <li><a href="events.html" class="active">Events</a></li>
-        </ul>
-        <div class="nav-end">
-          <a class="nav-gh" href="https://discord.com/users/172108151024254976" target="_blank">
-            Discord Profile
-          </a>
-          <a class="nav-add" href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+    <!-- ── NAV: outside Barba wrapper ── -->
+    <nav>
+        <div class="wrap">
+            <div class="nav-inner">
+                <a class="nav-brand" href="#">
+                    <img src="assets/minato.gif" alt="shiz" class="nav-brand-logo">
+                    <span class="nav-brand-name">@Zoldyck</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="servers.html">Servers</a></li>
+                    <li><a href="onsale.html">On Sale</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                </ul>
+                <div class="nav-end">
+                    <a class="nav-gh" href="https://discord.com/users/172108151024254976" target="_blank">
+                        Discord Profile
+                    </a>
+                    <a class="nav-add" href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="6" x2="20" y2="6" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="18" x2="20" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+                <button class="nav-close" id="nav-close" aria-label="Menu">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+                <a href="main.html">Home</a>
+                <a href="servers.html">Servers</a>
+                <a href="onsale.html">On Sale</a>
+                <a href="events.html">Events</a>
+                <a href="https://discord.gg/inmadara" target="_blank">Server Link</a>
+            </div>
         </div>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="18" x2="20" y2="18" />
-          </svg>
-        </button>
+    </nav>
 
+    <!-- ── BARBA WRAPPER ── -->
+    <div data-barba="wrapper">
+        <main data-barba="container" data-barba-namespace="events">
 
-        <!-- <button class="nav-close" id="nav-close" aria-label="Menu">
-          <i class="fa-solid fa-x"></i>
-        </button> -->
-
-
-      </div>
-      <div class="mobile-menu" id="mobile-menu">
-        <button class="nav-close" id="nav-close" aria-label="Menu">
-          <i class="fa-solid fa-x"></i>
-        </button>
-        <a href="main.html">Home</a>
-        <a href="servers.html">Servers</a>
-        <a href="onsale.html">On Sale</a>
-        <a href="events.html">Events</a>
-        <a href="https://discord.gg/inmadara" target="_blank">Server Link</a>
-      </div>
-    </div>
-  </nav>
-    
-
-    <div class="events-page-title">
+    <div class="events-page-title gsap-hidden">
         <h1>No Events Currently</h1>
         <p>Many Events Upcoming</p>
- 
-        
     </div>
+
+        </main>
+    </div><!-- /#barba-wrapper -->
 
     
 
@@ -90,7 +90,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollTrigger.min.js"
         integrity="sha512-IHDCHrefnBT3vOCsvdkMvJF/MCPz/nBauQLzJkupa4Gn4tYg5a6VGyzIrjo6QAUy3We5HFOZUlkUpP0dkgE60A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/@barba/core"></script>
+
+    
     <script src="script.js"></script>
+
+
 </body>
 
 </html>

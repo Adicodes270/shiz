@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Zoldyck | Servers</title>
-    <    <meta name="description"
+    <meta name="description"
         content="Shiz Portfolio Showcasing his best servers his vanity's on sale and events ongoing">
     <link rel="icon" type="image/x-icon" href="assets/minato.gif">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,243 +18,18 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="theme.css">
 
-    <style>
-        /* ── PAGE TITLE ── */
-        .servers-page-title {
-            text-align: center;
-            padding: 100px 0 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .servers-page-title h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(40px, 7vw, 72px);
-            letter-spacing: 6px;
-            color: transparent;
-            -webkit-text-stroke: 1.5px var(--purple-bright);
-            filter: drop-shadow(0 0 20px var(--purple));
-        }
-
-        .servers-page-title p {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-top: 8px;
-        }
-
-        /* ── SERVER CARDS CONTAINER ── */
-        .server-cards-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 40px auto 80px;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ── SERVER CARD ── */
-        .server-card {
-            padding: 20px;
-            border-radius: 20px;
-            background: linear-gradient(145deg, rgba(80, 0, 160, 0.10), rgba(0, 0, 0, 0.6));
-            border: 1px solid var(--purple-dark);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 16px;
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(128, 0, 255, 0.08);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        /* top shimmer line */
-        .server-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
-            opacity: 0.4;
-        }
-
-        .server-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--purple);
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.6),
-                0 0 35px rgba(128, 0, 255, 0.25);
-        }
-
-        /* last card — don't stretch full row */
-        /* .server-card:last-child {
-            grid-column: 1 / -1;
-            justify-self: center;
-            width: 100%;
-            max-width: 360px;
-        } */
-
-        /* ── CARD HEADER ── */
-        .server-card-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .server-card-thumb {
-            width: 64px;
-            height: 64px;
-            border-radius: 14px;
-            object-fit: cover;
-            border: 2px solid var(--purple-dark);
-            flex-shrink: 0;
-        }
-
-        .server-card-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .server-card-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 24px;
-            letter-spacing: 2px;
-            color: var(--text);
-            line-height: 1;
-        }
-
-        .server-card-subtitle {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--purple-bright);
-            margin-top: 2px;
-        }
-
-        .server-card-desc, .inner-card-desc {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 12px;
-            font-weight: 300;
-            color: var(--muted);
-            margin-top: 1px;
-        }
-
-        /* ── JOIN BUTTON ── */
-        .server-card-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            cursor: pointer;
-            letter-spacing: 0.5px;
-        }
-
-        .join-server-btn {
-            background: var(--purple);
-            border: 1px solid var(--purple-bright);
-            color: #fff;
-        }
-
-        .join-server-btn:hover {
-            background: var(--purple-bright);
-            box-shadow: 0 4px 20px rgba(128, 0, 255, 0.5);
-            transform: translateY(-1px);
-        }
-
-        /* ── CUSTOM CURSOR FIXES ── */
-        html, body, a, button, select, input, [role="button"] {
-            cursor: none !important;
-        }
-
-        .custom-cursor {
-            position: fixed;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 99999;
-            transition: transform 0.1s ease-out;
-        }
-
-        .custom-cursor.hover {
-            transform: translate(-50%, -50%) scale(1.6);
-            background-color: rgba(168, 85, 247, 0.8);
-        }
-
-        /* ── STATUS BLINKING DOTS ── */
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        .status-dot.online {
-            background-color: #23a55a;
-            box-shadow: 0 0 8px #23a55a;
-            animation: pulse-green 2s infinite;
-        }
-
-        .status-dot.members {
-            background-color: #80848e;
-        }
-
-        @keyframes pulse-green {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(35, 165, 90, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 6px rgba(35, 165, 90, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(35, 165, 90, 0);
-            }
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 900px) {
-            .server-cards-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 560px) {
-            .server-cards-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <!-- page styles are in style.css -->
 </head>
 
 <body>
 
+    <!-- ── PAGE WIPE: covers screen during transitions ── -->
+    <div id="page-wipe"></div>
+
     <div class="custom-cursor"></div>
     <audio id="bg-music" src="assets/legacy.mp3" preload="auto"></audio>
 
+    <!-- ── NAV: outside Barba wrapper so it persists across page transitions ── -->
     <nav>
         <div class="wrap">
             <div class="nav-inner">
@@ -275,8 +50,8 @@
                     <a class="nav-add" href="https://discord.gg/zoldyck" target="_blank">Server Link</a>
                 </div>
                 <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="4" y1="6" x2="20" y2="6" />
                         <line x1="4" y1="12" x2="20" y2="12" />
                         <line x1="4" y1="18" x2="20" y2="18" />
@@ -296,114 +71,134 @@
         </div>
     </nav>
 
-    <div class="servers-page-title">
-        <h1>Servers</h1>
-        <p>All servers owned by Shiz</p>
-    </div>
-
-    <div class="server-cards-container">
-
-        <div class="server-card" data-invite="zoldyck">
-            <div class="server-card-header">
-                <img src="assets/zoldyck.gif" alt="Zoldyck" class="server-card-thumb">
-                <div class="server-card-meta">
-                    <h3 class="server-card-title">Zoldyck</h3>
-                    <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
-                    <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
-                </div>
-            </div>
-            <a href="https://discord.gg/zoldyck" target="_blank" class="server-card-btn join-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                Join Server
-            </a>
+    <!-- ── BARBA WRAPPER: Barba swaps only what's inside this ── -->
+    <div data-barba="wrapper">
+        <main data-barba="container" data-barba-namespace="servers">
+        <div class="servers-page-title gsap-hidden">
+            <h1>Servers</h1>
+            <p>All servers owned by Shiz</p>
         </div>
 
-        <div class="server-card" data-invite="Vegeta">
-            <div class="server-card-header">
-                <img src="assets/vegeta.jpg" alt="Vegeta" class="server-card-thumb">
-                <div class="server-card-meta">
-                    <h3 class="server-card-title">Vegeta</h3>
-                    <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
-                    <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
-                </div>
-            </div>
-            <a href="https://discord.gg/vegeta" target="_blank" class="server-card-btn join-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                Join Server
-            </a>
-        </div>
+        <div class="server-cards-container">
 
-        <div class="server-card" data-invite="wistoria">
-            <div class="server-card-header">
-                <img src="assets/wistoria.png" alt="Wistoria" class="server-card-thumb">
-                <div class="server-card-meta">
-                    <h3 class="server-card-title">Wistoria</h3>
-                    <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
-                    <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
+            <div class="server-card gsap-hidden" data-invite="zoldyck">
+                <div class="server-card-header">
+                    <img src="assets/zoldyck.gif" alt="Zoldyck" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Zoldyck</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online:
+                            Loading...
+                        </h4>
+                        <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...
+                        </h4>
+                    </div>
                 </div>
+                <a href="https://discord.gg/zoldyck" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
             </div>
-            <a href="https://discord.gg/wistoria" target="_blank" class="server-card-btn join-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                Join Server
-            </a>
-        </div>
 
-        <div class="server-card" data-invite="YSktkVDq3r">
-            <div class="server-card-header">
-                <img src="assets/kuroko.gif" alt="Kuroko" class="server-card-thumb">
-                <div class="server-card-meta">
-                    <h3 class="server-card-title">Kuroko</h3>
-                    <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
-                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
+            <div class="server-card gsap-hidden" data-invite="Vegeta">
+                <div class="server-card-header">
+                    <img src="assets/vegeta.jpg" alt="Vegeta" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Vegeta</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online:
+                            Loading...
+                        </h4>
+                        <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...
+                        </h4>
+                    </div>
                 </div>
+                <a href="https://discord.gg/vegeta" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
             </div>
-            <a href="https://discord.gg/YSktkVDq3r" target="_blank" class="server-card-btn join-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                Join Server
-            </a>
-        </div>
 
-        <div class="server-card" data-invite="roger">
-            <div class="server-card-header">
-                <img src="assets/roger.jpg" alt="Roger" class="server-card-thumb">
-                <div class="server-card-meta">
-                    <h3 class="server-card-title">Roger</h3>
-                    <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
-                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
+            <div class="server-card gsap-hidden" data-invite="wistoria">
+                <div class="server-card-header">
+                    <img src="assets/wistoria.png" alt="Wistoria" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Wistoria</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="inner-card-desc stat-online"><span class="status-dot online"></span>Online:
+                            Loading...
+                        </h4>
+                        <h4 class="inner-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...
+                        </h4>
+                    </div>
                 </div>
+                <a href="https://discord.gg/wistoria" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
             </div>
-            <a href="https://discord.gg/roger" target="_blank" class="server-card-btn join-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                Join Server
-            </a>
-        </div>
 
-        <!-- <div class="server-card" data-invite="kisuke">
+            <div class="server-card gsap-hidden" data-invite="YSktkVDq3r">
+                <div class="server-card-header">
+                    <img src="assets/kuroko.gif" alt="Kuroko" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Kuroko</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online:
+                            Loading...
+                        </h4>
+                        <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total:
+                            Loading...
+                        </h4>
+                    </div>
+                </div>
+                <a href="https://discord.gg/YSktkVDq3r" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <div class="server-card gsap-hidden" data-invite="roger">
+                <div class="server-card-header">
+                    <img src="assets/roger.jpg" alt="Roger" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Roger</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online:
+                            Loading...
+                        </h4>
+                        <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total:
+                            Loading...
+                        </h4>
+                    </div>
+                </div>
+                <a href="https://discord.gg/roger" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
+            </div>
+
+            <!-- <div class="server-card" data-invite="kisuke">
             <div class="server-card-header">
                 <img src="assets/kisuke.webp" alt="Kisuke" class="server-card-thumb">
                 <div class="server-card-meta">
@@ -423,27 +218,35 @@
             </a>
         </div> -->
 
-        <div class="server-card" data-invite="jugram">
-            <div class="server-card-header">
-                <img src="assets/jugram.gif" alt="Jugram" class="server-card-thumb">
-                <div class="server-card-meta">
-                    <h3 class="server-card-title">Jugram</h3>
-                    <p class="server-card-subtitle">Anicom</p>
-                    <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online: Loading...</h4>
-                    <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total: Loading...</h4>
+            <div class="server-card gsap-hidden" data-invite="jugram">
+                <div class="server-card-header">
+                    <img src="assets/jugram.gif" alt="Jugram" class="server-card-thumb">
+                    <div class="server-card-meta">
+                        <h3 class="server-card-title">Jugram</h3>
+                        <p class="server-card-subtitle">Anicom</p>
+                        <h4 class="server-card-desc stat-online"><span class="status-dot online"></span>Online:
+                            Loading...
+                        </h4>
+                        <h4 class="server-card-desc stat-total"><span class="status-dot members"></span>Total:
+                            Loading...
+                        </h4>
+                    </div>
                 </div>
+                <a href="https://discord.gg/jugram" target="_blank" class="server-card-btn join-server-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    Join Server
+                </a>
             </div>
-            <a href="https://discord.gg/jugram" target="_blank" class="server-card-btn join-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                Join Server
-            </a>
-        </div>
 
-    </div>
+        </div>
+    </main>
+    </div><!-- /#barba-wrapper -->
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"
         integrity="sha512-qF6akR/fsZAB4Co1QDDnUXWnaQseLGXoniuSuSlPQK6+aWhlMZcHzkasCSlnWoe+TJuudlka1/IQ01Dnhgq95g=="
@@ -451,7 +254,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollTrigger.min.js"
         integrity="sha512-IHDCHrefnBT3vOCsvdkMvJF/MCPz/nBauQLzJkupa4Gn4tYg5a6VGyzIrjo6QAUy3We5HFOZUlkUpP0dkgE60A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/@barba/core"></script>
+
+
     <script src="script.js"></script>
+
+
 
 </body>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Zoldyck | On Sale</title>
-        <meta name="description"
+    <meta name="description"
         content="Shiz Portfolio Showcasing his best servers his vanity's on sale and events ongoing">
     <link rel="icon" type="image/x-icon" href="assets/minato.gif">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,24 +45,28 @@
             margin-top: 8px;
         }
 
-         .onsale-card:last-child {
+        .onsale-card:last-child {
             grid-column: 1 / -1;
             justify-self: center;
             width: 100%;
             max-width: 360px;
         }
+
+        
     </style>
 </head>
 
 <body>
 
+    <!-- ── PAGE WIPE: covers screen during transitions ── -->
+    <div id="page-wipe"></div>
 
     <div class="custom-cursor"></div>
     <audio id="bg-music" src="assets/legacy.mp3" preload="auto"></audio>
+
+    <!-- ── NAV: outside Barba wrapper ── -->
     <nav>
         <div class="wrap">
-
-
             <div class="nav-inner">
                 <a class="nav-brand" href="#">
                     <img src="assets/minato.gif" alt="shiz" class="nav-brand-logo">
@@ -88,13 +92,6 @@
                         <line x1="4" y1="18" x2="20" y2="18" />
                     </svg>
                 </button>
-
-
-                <!-- <button class="nav-close" id="nav-close" aria-label="Menu">
-          <i class="fa-solid fa-x"></i>
-        </button> -->
-
-
             </div>
             <div class="mobile-menu" id="mobile-menu">
                 <button class="nav-close" id="nav-close" aria-label="Menu">
@@ -109,60 +106,80 @@
         </div>
     </nav>
 
-    <div class="onsale-page-title">
-        <h1>ON SALE</h1>
-        <p>All vans and username that are on sale by shiz</p>
-    </div>
+    <!-- ── BARBA WRAPPER ── -->
+    <div data-barba="wrapper">
+        <main data-barba="container" data-barba-namespace="onsale">
 
-    <div class="onsale-cards-container">
-
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/zoldyck.gif" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/zoldyck</h3>
-                <p class="onsale-card-subtitle">The greatest bloodline</p>
-                <p class="onsale-van-type"> Type: Anime / Anicom </p>
-                <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+            <div class="onsale-page-title gsap-hidden">
+                <h1>ON SALE</h1>
+                <p>All vans and username that are on sale by shiz</p>
             </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/zoldyck" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
 
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/vegeta.jpg" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/vegeta</h3>
-                <p class="onsale-card-subtitle">Saiyan Prince</p>
-                <p class="onsale-van-type">Type: Anime / Anicom</p>
-                <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
-            </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/vegeta" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
+            <div class="onsale-cards-container">
 
-    <!-- <div class="onsale-card">
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/zoldyck.gif" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/zoldyck</h3>
+                            <p class="onsale-card-subtitle">The greatest bloodline</p>
+                            <p class="onsale-van-type"> Type: Anime / Anicom </p>
+                            <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/zoldyck" target="_blank" class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
+
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/vegeta.jpg" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/vegeta</h3>
+                            <p class="onsale-card-subtitle">Saiyan Prince</p>
+                            <p class="onsale-van-type">Type: Anime / Anicom</p>
+                            <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/vegeta" target="_blank" class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
+
+                <!-- <div class="onsale-card">
         <div class="onsale-card-header">
             <img src="assets/kisuke.webp" alt="Vanity" class="onsale-card-thumb">
             <div class="onsale-card-meta">
@@ -185,122 +202,167 @@
         </div>
     </div> -->
 
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/kuroko.gif" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/kuroko</h3>
-                <p class="onsale-card-subtitle">The Phantom Sixth Man</p>
-                <p class="onsale-van-type"> Type: Anime / Anicom</p>
-                <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
-            </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/YSktkVDq3r" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/kuroko.gif" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/kuroko</h3>
+                            <p class="onsale-card-subtitle">The Phantom Sixth Man</p>
+                            <p class="onsale-van-type"> Type: Anime / Anicom</p>
+                            <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/YSktkVDq3r" target="_blank"
+                            class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
 
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/roger.jpg" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/roger</h3>
-                <p class="onsale-card-subtitle">The Pirate King</p>
-                <p class="onsale-van-type"> Type: Anime / Anicom</p>
-                <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
-            </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/roger" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/roger.jpg" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/roger</h3>
+                            <p class="onsale-card-subtitle">The Pirate King</p>
+                            <p class="onsale-van-type"> Type: Anime / Anicom</p>
+                            <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/roger" target="_blank" class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
 
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/wistoria.png" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/wistoria</h3>
-                <p class="onsale-card-subtitle">The Guardian Teacher</p>
-                <p class="onsale-van-type"> Type: Anime / Anicom</p>
-                <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
-            </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/wistoria" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/wistoria.png" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/wistoria</h3>
+                            <p class="onsale-card-subtitle">The Guardian Teacher</p>
+                            <p class="onsale-van-type"> Type: Anime / Anicom</p>
+                            <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/wistoria" target="_blank" class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
 
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/jugram.gif" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/jugram</h3>
-                <p class="onsale-card-subtitle">The Emperor's Shadow</p>
-                <p class="onsale-van-type"> Type: Anime / Anicom</p>
-                <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
-            </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/jugram" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/jugram.gif" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/jugram</h3>
+                            <p class="onsale-card-subtitle">The Emperor's Shadow</p>
+                            <p class="onsale-van-type"> Type: Anime / Anicom</p>
+                            <h4 class="onsale-card-desc"><span class="status-dot online"></span>Status: For Sale</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Open</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/jugram" target="_blank" class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
 
-    <div class="onsale-card">
-        <div class="onsale-card-header">
-            <img src="assets/ratio.gif" alt="Vanity" class="onsale-card-thumb">
-            <div class="onsale-card-meta">
-                <h3 class="onsale-card-title">/ratio</h3>
-                <p class="onsale-card-subtitle">Premium Vanity</p>
-                <p class="onsale-van-type"> Type: General</p>
-                <h4 class="onsale-card-desc"><span class="status-dot red"></span>Status: N/A For now</h4>
-                <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Closed</h4>
-            </div>
-        </div>
-        <div class="onsale-actions-wrapper">
-            <a href="https://discord.gg/dkGaduTH9n" target="_blank" class="onsale-card-btn check-server-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Check Server
-            </a>
-            <a href="https://discord.com/users/172108151024254976" target="_blank" class="onsale-card-btn dm-offer-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                DM Shiz to Offer
-            </a>
-        </div>
-    </div>
+                <div class="onsale-card gsap-hidden">
+                    <div class="onsale-card-header">
+                        <img src="assets/ratio.gif" alt="Vanity" class="onsale-card-thumb">
+                        <div class="onsale-card-meta">
+                            <h3 class="onsale-card-title">/ratio</h3>
+                            <p class="onsale-card-subtitle">Premium Vanity</p>
+                            <p class="onsale-van-type"> Type: General</p>
+                            <h4 class="onsale-card-desc"><span class="status-dot red"></span>Status: N/A For now</h4>
+                            <h4 class="onsale-card-desc"><span class="status-dot members"></span>Offers: Closed</h4>
+                        </div>
+                    </div>
+                    <div class="onsale-actions-wrapper">
+                        <a href="https://discord.gg/dkGaduTH9n" target="_blank"
+                            class="onsale-card-btn check-server-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Check Server
+                        </a>
+                        <a href="https://discord.com/users/172108151024254976" target="_blank"
+                            class="onsale-card-btn dm-offer-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            DM Shiz to Offer
+                        </a>
+                    </div>
+                </div>
 
-</div>
+            </div><!-- /.onsale-cards-container -->
+
+        </main>
+    </div><!-- /#barba-wrapper -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"
         integrity="sha512-qF6akR/fsZAB4Co1QDDnUXWnaQseLGXoniuSuSlPQK6+aWhlMZcHzkasCSlnWoe+TJuudlka1/IQ01Dnhgq95g=="
@@ -309,6 +371,7 @@
         integrity="sha512-IHDCHrefnBT3vOCsvdkMvJF/MCPz/nBauQLzJkupa4Gn4tYg5a6VGyzIrjo6QAUy3We5HFOZUlkUpP0dkgE60A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://unpkg.com/@barba/core"></script>
 
     <script src="script.js"></script>
 </body>
