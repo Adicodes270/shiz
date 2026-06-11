@@ -185,50 +185,87 @@ function initPageAnimations(namespace) {
 const DISCORD_USER_ID = '172108151024254976';
 
 async function getLanyardData() {
+  // 1. Instantly inject from Session Storage Cache (Eliminates Alt-text pops entirely)
+  const cachedAvatar = sessionStorage.getItem('cachedAvatar');
+  const cachedDecoration = sessionStorage.getItem('cachedDecoration');
+
+  const avatarImageElement = document.querySelector(".profile-avatar");
+  const smallAvatarImageElement = document.getElementById("small-avatar");
+  const navBrandLogoElement = document.querySelector(".nav-brand-logo");
+  const decorationImageElement = document.querySelector(".decoration");
+
+  if (cachedAvatar) {
+    if (avatarImageElement) avatarImageElement.src = cachedAvatar;
+    if (smallAvatarImageElement) smallAvatarImageElement.src = cachedAvatar;
+    if (navBrandLogoElement) navBrandLogoElement.src = cachedAvatar;
+  }
+
+  if (decorationImageElement) {
+    if (cachedDecoration) {
+      decorationImageElement.src = cachedDecoration;
+      decorationImageElement.style.display = "block";
+    } else if (cachedAvatar) {
+      decorationImageElement.style.display = "none";
+    }
+  }
+
+  // 2. Perform background async updates to live state safely
   try {
     const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
     const jsonResult = await response.json();
 
     if (jsonResult.success) {
       const userData = jsonResult.data;
-
       const userId = userData.discord_user.id;
       const avatarHash = userData.discord_user.avatar;
       const decorationHash = userData.discord_user.avatar_decoration_data?.asset;
 
+      let freshAvatarUrl = "";
       if (avatarHash) {
         const isAnimated = avatarHash.startsWith("a_");
         const fileExtension = isAnimated ? "gif" : "png";
-        const fullAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
-
-        const avatarImageElement = document.querySelector(".profile-avatar");
-        const smallAvatarImageElement = document.getElementById("small-avatar");
-        const navBrandLogoElement = document.querySelector(".nav-brand-logo");
-
-        if (avatarImageElement) avatarImageElement.src = fullAvatarUrl;
-        if (smallAvatarImageElement) smallAvatarImageElement.src = fullAvatarUrl;
-        if (navBrandLogoElement) navBrandLogoElement.src = fullAvatarUrl;
+        freshAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${fileExtension}?size=512`;
+        
+        if (freshAvatarUrl !== cachedAvatar) {
+          sessionStorage.setItem('cachedAvatar', freshAvatarUrl);
+          if (avatarImageElement) avatarImageElement.src = freshAvatarUrl;
+          if (smallAvatarImageElement) smallAvatarImageElement.src = freshAvatarUrl;
+          if (navBrandLogoElement) navBrandLogoElement.src = freshAvatarUrl;
+        }
       }
 
-      const decorationImageElement = document.querySelector(".decoration");
       if (decorationImageElement) {
         if (decorationHash) {
-          const decorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
-          decorationImageElement.src = decorationUrl;
+          const freshDecorationUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${decorationHash}.png?size=240&passthrough=true`;
+          if (freshDecorationUrl !== cachedDecoration) {
+            sessionStorage.setItem('cachedDecoration', freshDecorationUrl);
+            decorationImageElement.src = freshDecorationUrl;
+          }
           decorationImageElement.style.display = "block";
         } else {
+          sessionStorage.removeItem('cachedDecoration');
           decorationImageElement.style.display = "none";
         }
       }
 
-      console.log(`Live Status: ${userData.discord_status}`);
+      const statusElement = document.getElementById("discord-status");
+      if (statusElement) {
+        statusElement.className = "status-dot"; 
+        if (userData.discord_status === "online") statusElement.classList.add("online");
+        else if (userData.discord_status === "dnd") statusElement.classList.add("red");
+        else if (userData.discord_status === "idle") statusElement.classList.add("idle");
+        else statusElement.classList.add("members");
+      }
 
-    } else {
-      console.warn("API was reached but couldn't find user data.");
+      const rawStatusText = document.getElementById("discord-status-text");
+      if (rawStatusText) {
+        let textStatus = userData.discord_status.toUpperCase();
+        if (textStatus === "DND") textStatus = "DO NOT DISTURB";
+        rawStatusText.textContent = textStatus;
+      }
     }
-
   } catch (error) {
-    console.error("Network error fetching from Lanyard API:", error);
+    console.error("Network error updating from Lanyard API:", error);
   }
 }
 
@@ -282,68 +319,40 @@ function trackAllServers() {
 const pageWipe = document.getElementById('page-wipe');
 
 barba.init({
-  prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
-
+  sync: false,
   transitions: [
     {
-      name: 'wipe',
-
+      name: 'page-swipe-transition',
       leave(data) {
-        gsap.set(data.current.container.querySelectorAll('.gsap-hidden'), {
-          autoAlpha: 0,
-          visibility: 'hidden'
-        });
-        return Promise.resolve();
+        return gsap.fromTo(pageWipe, 
+          { scaleY: 0, transformOrigin: 'top center' },
+          { scaleY: 1, duration: 0.4, ease: 'power2.inOut' }
+        );
       },
-
-      // Wipe sweeps DOWN to cover the screen before content swaps
-      beforeEnter(data) {
-        gsap.set(data.next.container.querySelectorAll('.gsap-hidden'), {
-          autoAlpha: 0,
-          visibility: 'hidden'
-        });
-        return gsap.to(pageWipe, {
-          scaleY: 1,
-          transformOrigin: 'top center',
-          duration: 0.45,
-          ease: 'power3.inOut'
-        });
-      },
-
-      // Content is already swapped by Barba; keep new container hidden under wipe
-      enter(data) {
-        gsap.set(data.next.container, { opacity: 1 });
-        gsap.set(data.next.container.querySelectorAll('.gsap-hidden'), { autoAlpha: 0, visibility: 'hidden' });
-        return Promise.resolve();
-        
-      },
-
-      // Wipe sweeps UP to reveal the new page, then run page animations
       after(data) {
         const namespace = data.next.namespace;
 
-        // Update active nav link
         document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
           a.classList.remove('active');
           const href = a.getAttribute('href');
-          if (href === `${namespace}.html` ||
-            (namespace === 'home' && href === 'main.html')) {
+          if (href === `${namespace}.html` || (namespace === 'home' && href === 'main.html')) {
             a.classList.add('active');
           }
         });
 
-        // Re-wire mobile menu close
         document.querySelectorAll('.mobile-menu a').forEach(a => {
           a.addEventListener('click', closeMenu);
         });
 
-        // Reveal: wipe sweeps UP, then run page animations
-        return gsap.to(pageWipe, {
+        // Instantly start rendering inner text elements and avatars
+        initPageAnimations(namespace);
+
+        // Clear the screen overlay immediately in parallel
+        gsap.to(pageWipe, {
           scaleY: 0,
           transformOrigin: 'bottom center',
-          duration: 0.45,
-          ease: 'power3.inOut',
-          onComplete: () => initPageAnimations(namespace)
+          duration: 0.4,
+          ease: 'power2.out'
         });
       }
     }

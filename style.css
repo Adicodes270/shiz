@@ -1035,9 +1035,10 @@ nav {
     align-items: center;
     gap: 6px;
 
-    background: #1a1020;
-    color: #c084fc;
-    border: 1px solid rgba(192, 132, 252, 0.25);
+    background: var(--purple-dark);
+    /* color: #c084fc; */
+    color: var(--purple-bright);
+    border: 1px solid rgba(14, 63, 199, 0.25);
     padding: 5px 12px;
     border-radius: 16px;
 
@@ -1239,7 +1240,7 @@ nav {
     transition: all 0.35s ease;
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(128, 0, 255, 0.15);
+        0 0 30px rgba(30, 80, 255, 0.15);
 }
 
 .server-card:hover {
@@ -1247,7 +1248,7 @@ nav {
     border-color: var(--purple);
     box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.45),
-        0 0 35px rgba(128, 0, 255, 0.18);
+        0 0 35px rgba(30, 80, 255, 0.18);
 }
 
 .server-card-header {
@@ -1342,7 +1343,7 @@ nav {
 .join-server-btn:hover {
     opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(128, 0, 255, 0.45);
+    box-shadow: 0 4px 20px rgba(30, 80, 255, 0.45);
 }
 
 .badge {
@@ -2341,7 +2342,7 @@ footer {
 .onsale-card {
     padding: 20px;
     border-radius: 20px;
-    background: linear-gradient(145deg, rgba(80, 0, 160, 0.10), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(145deg, rgba(0, 40, 140, 0.10), rgba(0, 0, 0, 0.6));
     border: 1px solid var(--purple-dark);
     display: flex;
     flex-direction: column;
@@ -2349,7 +2350,7 @@ footer {
     gap: 16px;
     box-shadow:
         0 8px 24px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(128, 0, 255, 0.08);
+        0 0 20px rgba(30, 80, 255, 0.08);
     position: relative;
     overflow: hidden;
     transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
@@ -2373,7 +2374,7 @@ footer {
     border-color: var(--purple);
     box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(128, 0, 255, 0.25);
+        0 0 35px rgba(30, 80, 255, 0.25);
 }
 
 /* Balance singular dangling cards if the rows ever break oddly */
@@ -2486,7 +2487,7 @@ footer {
 
 .dm-offer-btn:hover {
     background: var(--purple-bright);
-    box-shadow: 0 4px 20px rgba(128, 0, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(30, 80, 255, 0.5);
     transform: translateY(-1px);
 }
 
@@ -2610,7 +2611,7 @@ footer {
 .server-card {
     padding: 20px;
     border-radius: 20px;
-    background: linear-gradient(145deg, rgba(80, 0, 160, 0.10), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(145deg, rgba(0, 40, 140, 0.10), rgba(0, 0, 0, 0.6));
     border: 1px solid var(--purple-dark);
     display: flex;
     flex-direction: column;
@@ -2618,7 +2619,7 @@ footer {
     gap: 16px;
     box-shadow:
         0 8px 24px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(128, 0, 255, 0.08);
+        0 0 20px rgba(30, 80, 255, 0.08);
     position: relative;
     overflow: hidden;
     transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
@@ -2640,7 +2641,7 @@ footer {
     border-color: var(--purple);
     box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(128, 0, 255, 0.25);
+        0 0 35px rgba(30, 80, 255, 0.25);
 }
 
 /* ── CARD HEADER ── */
@@ -2718,7 +2719,7 @@ footer {
 
 .join-server-btn:hover {
     background: var(--purple-bright);
-    box-shadow: 0 4px 20px rgba(128, 0, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(30, 80, 255, 0.5);
     transform: translateY(-1px);
 }
 
@@ -2802,7 +2803,7 @@ footer {
 #page-wipe {
     position: fixed;
     inset: 0;
-    background: var(--purple, #6b00d4);
+    background: var(--purple, #0047d4);
     z-index: 99999;
     transform: scaleY(0);
     transform-origin: bottom center;
