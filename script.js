@@ -359,6 +359,41 @@ barba.init({
   ]
 });
 
+// ── DYNAMIC FAVICON FROM DISCORD AVATAR ──
+async function setDiscordFavicon() {
+  try {
+    const cached = sessionStorage.getItem('cachedAvatar');
+    if (cached) {
+      applyFavicon(cached);
+      return;
+    }
+    const res = await fetch(`https://api.lanyard.rest/v1/users/172108151024254976`);
+    const json = await res.json();
+    if (json.success) {
+      const { id, avatar } = json.data.discord_user;
+      const ext = avatar.startsWith('a_') ? 'gif' : 'png';
+      const url = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${ext}?size=64`;
+      sessionStorage.setItem('cachedAvatar', url);
+      applyFavicon(url);
+    }
+  } catch (e) {
+    console.error('Favicon fetch failed:', e);
+  }
+}
+
+function applyFavicon(url) {
+  // Remove all existing favicons
+  document.querySelectorAll("link[rel*='icon']").forEach(el => el.remove());
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.type = url.endsWith('.gif') ? 'image/gif' : 'image/png';
+  link.href = url;
+  document.head.appendChild(link);
+}
+
+setDiscordFavicon();
+
+
 // ── FIRST PAGE LOAD ──
 // On the very first load (coming from index.html wipe), the #entry-wipe
 // in main.html covers the screen. Reveal it, then run page animations.
