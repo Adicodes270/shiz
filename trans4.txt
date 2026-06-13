@@ -1,0 +1,40 @@
+barba.init({
+  sync: false,
+  transitions: [
+    {
+      name: 'page-swipe-transition',
+      leave(data) {
+        return gsap.fromTo(pageWipe, 
+          { scaleY: 0, transformOrigin: 'bottom center' },
+          { scaleY: 1, duration: 0.8, ease: 'power2.inOut' }
+        );
+      },
+      after(data) {
+        const namespace = data.next.namespace;
+
+        document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+          a.classList.remove('active');
+          const href = a.getAttribute('href');
+          if (href === `${namespace}.html` || (namespace === 'home' && href === 'main.html')) {
+            a.classList.add('active');
+          }
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(a => {
+          a.addEventListener('click', closeMenu);
+        });
+
+        // Instantly start rendering inner text elements and avatars
+        initPageAnimations(namespace);
+
+        // Clear the screen overlay immediately in parallel
+        gsap.to(pageWipe, {
+          scaleY: 0,
+          transformOrigin: 'left',
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+      }
+    }
+  ]
+});

@@ -350,7 +350,7 @@ barba.init({
         // Clear the screen overlay immediately in parallel
         gsap.to(pageWipe, {
           scaleY: 0,
-          transformOrigin: 'bottom center',
+          transformOrigin: 'left',
           duration: 0.4,
           ease: 'power2.out'
         });
