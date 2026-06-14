@@ -186,7 +186,20 @@ body::before {
         linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 32px 32px;
+
+
     pointer-events: none;
+}
+
+#particle-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#particle-bg canvas {
+    display: block;
 }
 
 /* Animated glowing orbs for that color pop */
@@ -371,6 +384,7 @@ nav {
     border: 1px solid var(--purple-bright);
     background: rgba(255, 255, 255, 0.03);
     transition: all 1s var(--ease);
+    box-shadow: var(--blue-lgs);
 }
 
 .nav-gh:hover {
@@ -391,6 +405,7 @@ nav {
     color: var(--bg);
     background: var(--purple);
     transition: all 1s var(--ease);
+    box-shadow: var(--blue-lgs);
 }
 
 .nav-add:hover {
@@ -591,7 +606,7 @@ nav {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 24px;
     padding: 28px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    box-shadow: var(--blue-lgs);
     transition: transform 0.3s ease;
 }
 
@@ -610,6 +625,7 @@ nav {
     /* border: 1px solid rgba(255, 255, 255, 0.04); */
     border: 1px solid var(--purple);
     background-color: #161616;
+    box-shadow: var(--blue-lgs);
     /* Fallback flat black variant background */
 }
 
@@ -718,6 +734,7 @@ nav {
     background: rgba(255, 255, 255, 0.07);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--blue-lgs);
 }
 
 .add-friend-btn:hover {
@@ -730,11 +747,13 @@ nav {
     background: #23a55a;
     color: #ffffff;
     font-weight: 600;
+    box-shadow: var(--blue-lgs);
 }
 
 .join-server-btn:hover {
     background: #1a7f43;
     transform: translateY(-1px);
+
 }
 
 /* Telegram blue button — mirrors join-server-btn structure */
@@ -742,6 +761,7 @@ nav {
     background: #229ed9;
     color: #ffffff;
     font-weight: 600;
+    box-shadow: var(--blue-lgs);
 }
 
 .telegram-btn:hover {
@@ -1038,7 +1058,7 @@ nav {
     background: var(--purple-dark);
     /* color: #c084fc; */
     color: var(--purple-bright);
-    border: 1px solid rgba(14, 63, 199, 0.25);
+   box-shadow: var(--blue-lgs);
     padding: 5px 12px;
     border-radius: 16px;
 
@@ -1292,13 +1312,15 @@ nav {
     font-size: 14px;
     font-weight: 600;
 }
-@media (min-width: 769px){
+
+@media (min-width: 769px) {
     .nav-links a.active {
         background: var(--purple);
         border-radius: 16px;
         color: var(--text);
     }
 }
+
 @media (max-width: 1100px) {
     .server-cards-container {
         grid-template-columns: repeat(2, 1fr);
