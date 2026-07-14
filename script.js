@@ -105,12 +105,66 @@ if (bgMusic) {
   });
 }
 
-// ── CUSTOM CURSOR ──
-var cursor = document.querySelector('.custom-cursor');
-if (cursor) {
+// ── CUSTOM CURSOR — dot + ring ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
+  var dot = document.createElement('div');
+  dot.id = 'cursor-dot';
+  dot.style.cssText = 'position:fixed;width:10px;height:10px;background:hsl(220,100%,65%);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%) translateZ(0);top:0;left:0;will-change:transform';
+
+  var ring = document.createElement('div');
+  ring.id = 'cursor-ring';
+  ring.style.cssText = 'position:fixed;width:36px;height:36px;border:2px solid hsla(220,100%,65%,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%) translateZ(0);top:0;left:0;will-change:transform;transition:width .35s cubic-bezier(0.16,1,0.3,1),height .35s cubic-bezier(0.16,1,0.3,1),border-color .35s cubic-bezier(0.16,1,0.3,1),background .35s cubic-bezier(0.16,1,0.3,1)';
+
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+
+  var mx = -100, my = -100, rx = -100, ry = -100, moving = false;
+
   document.addEventListener('mousemove', function (e) {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%) translateZ(0)';
+    if (!moving) { moving = true; raf(); }
+  });
+
+  var raf = function() {
+    var dx = mx - rx, dy = my - ry;
+    if (dx * dx + dy * dy < 0.5) { rx = mx; ry = my; moving = false; return; }
+    rx += dx * 0.18;
+    ry += dy * 0.18;
+    ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%) translateZ(0)';
+    requestAnimationFrame(raf);
+  };
+});
+
+function attachCursorHover() {
+  var ring = document.getElementById('cursor-ring');
+  if (!ring) return;
+  var sel = 'a, button, .nav-gh, .nav-add, .nav-toggle, .profile-card, .server-card, .onsale-card, .inner-stack-row, .profile-header-banner, .profile-view, .join-server-btn, .add-friend-btn, .telegram-btn, .server-card-btn, .onsale-card-btn, .check-server-btn, .dm-offer-btn, .row-action-btn, .nav-links a, .mobile-menu a, .discord-badges img';
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest(sel)) ring.classList.add('cursor-hover');
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (e.target.closest(sel) && (!e.relatedTarget || !e.relatedTarget.closest(sel))) {
+      ring.classList.remove('cursor-hover');
+    }
+  });
+}
+
+// ── MAGNETIC BUTTONS (navbar) ──
+function initMagnetic() {
+  document.querySelectorAll('.nav-gh, .nav-add').forEach(function (btn) {
+    btn.addEventListener('mousemove', function (e) {
+      var r = this.getBoundingClientRect();
+      var x = e.clientX - r.left - r.width / 2;
+      var y = e.clientY - r.top - r.height / 2;
+      this.style.transform = 'translate(' + (x * 0.35) + 'px,' + (y * 0.35) + 'px)';
+    });
+    btn.addEventListener('mouseleave', function () {
+      this.style.transform = '';
+    });
   });
 }
 
@@ -227,6 +281,10 @@ function initPageAnimations(namespace) {
         if (el) el.textContent = '150';
       });
   }
+
+  // Re-init micro-interactions on fresh DOM
+  attachCursorHover();
+  initMagnetic();
 
   // ── PROFILE CARD TILT ──
   document.querySelectorAll('.profile-card').forEach(card => {

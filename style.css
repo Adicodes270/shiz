@@ -25,26 +25,41 @@ body {
     cursor: none;
 }
 
-.custom-cursor {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: var(--purple-bright);
+/* ── CUSTOM CURSOR — dot + ring ── */
+#cursor-dot {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: hsl(var(--hsl-blue));
     border-radius: 50%;
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    position: fixed;
-
-    pointer-events: none;
-
-    transform: translate(-50%, -50%);
-
     z-index: 99999;
-
-    transition: transform 0.1s ease-out;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.25s ease;
 }
 
+#cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 2px solid hsla(var(--hsl-blue), 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.25s ease;
+}
+
+#cursor-ring.cursor-hover {
+    width: 56px;
+    height: 56px;
+    border-color: hsla(var(--hsl-blue), 0.15);
+    background: hsla(var(--hsl-blue), 0.06);
+}
 
 html,
 body,
@@ -213,7 +228,7 @@ body::before {
     pointer-events: none;
     z-index: -1;
     filter: blur(120px);
-    opacity: 0.45;
+    opacity: 0.2;
     animation: floatGlow 10s infinite ease-in-out alternate;
 }
 
@@ -383,8 +398,8 @@ nav {
     color: var(--muted);
     border: 1px solid var(--purple-bright);
     background: rgba(255, 255, 255, 0.03);
-    transition: all 1s var(--ease);
-    box-shadow: var(--blue-lgs);
+    transition: color 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+    box-shadow: none;
 }
 
 .nav-gh:hover {
@@ -404,8 +419,8 @@ nav {
     text-decoration: none;
     color: var(--bg);
     background: var(--purple);
-    transition: all 1s var(--ease);
-    box-shadow: var(--blue-lgs);
+    transition: color 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+    box-shadow: none;
 }
 
 .nav-add:hover {
@@ -825,9 +840,13 @@ nav {
     width: 25px;
     height: 25px;
     object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
-
+.discord-badges img:hover {
+    transform: scale(1.35);
+    filter: brightness(1.4) drop-shadow(0 0 8px hsla(var(--hsl-blue), 0.5));
+}
 
 
 /* ── PROFILE EFFECTS ── */
@@ -913,7 +932,7 @@ nav {
     background: hsl(200, 92%, 34%);
     /* Matching your deep blue theme variable */
     filter: blur(70px);
-    opacity: 0.15;
+    opacity: 0.08;
     pointer-events: none;
     transition: opacity 0.3s var(--ease);
 }
@@ -1259,16 +1278,15 @@ nav {
     gap: 20px;
     transition: all 0.35s ease;
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(30, 80, 255, 0.15);
+        0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .server-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     border-color: var(--purple);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.45),
-        0 0 35px rgba(30, 80, 255, 0.18);
+        0 8px 28px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(59, 130, 255, 0.15);
 }
 
 .server-card-header {
@@ -1965,15 +1983,6 @@ footer {
 
     }
 
-    .discord-badges img {
-        width: 25px;
-        height: 25px;
-        object-fit: contain;
-    }
-
-
-
-
 
 }
 
@@ -2023,11 +2032,11 @@ footer {
 
 /* ── TOUCH DEVICES — HIDE CURSOR ── */
 @media (hover: none) and (pointer: coarse) {
-    .custom-cursor {
+    #cursor-dot, #cursor-ring {
         display: none;
     }
 
-    body {
+    body, a, button, select, input, [role="button"] {
         cursor: auto;
     }
 }
@@ -2334,7 +2343,7 @@ footer {
     letter-spacing: 6px;
     color: transparent;
     -webkit-text-stroke: 1.5px var(--purple-bright);
-    filter: drop-shadow(0 0 20px var(--purple));
+    filter: drop-shadow(0 0 8px var(--purple));
 }
 
 .onsale-page-title p {
@@ -2371,8 +2380,7 @@ footer {
     justify-content: space-between;
     gap: 16px;
     box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(30, 80, 255, 0.08);
+        0 4px 16px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
     transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
@@ -2387,16 +2395,16 @@ footer {
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 /* Elevate card animation sequence matching servers.html */
 .onsale-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--purple);
+    transform: translateY(-4px);
+    border-color: var(--purple-bright);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(30, 80, 255, 0.25);
+        0 8px 28px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 255, 0.15);
 }
 
 /* Balance singular dangling cards if the rows ever break oddly */
@@ -2527,7 +2535,7 @@ footer {
     letter-spacing: 6px;
     color: transparent;
     -webkit-text-stroke: 1.5px var(--purple-bright);
-    filter: drop-shadow(0 0 20px var(--purple));
+    filter: drop-shadow(0 0 8px var(--purple));
 }
 
 .events-page-title p {
@@ -2604,7 +2612,7 @@ footer {
     letter-spacing: 6px;
     color: transparent;
     -webkit-text-stroke: 1.5px var(--purple-bright);
-    filter: drop-shadow(0 0 20px var(--purple));
+    filter: drop-shadow(0 0 8px var(--purple));
 }
 
 .servers-page-title p {
@@ -2640,8 +2648,7 @@ footer {
     justify-content: space-between;
     gap: 16px;
     box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(30, 80, 255, 0.08);
+        0 4px 16px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
     transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
@@ -2655,15 +2662,15 @@ footer {
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 .server-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--purple);
+    transform: translateY(-4px);
+    border-color: var(--purple-bright);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(30, 80, 255, 0.25);
+        0 8px 28px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 255, 0.15);
 }
 
 /* ── CARD HEADER ── */
@@ -2803,7 +2810,7 @@ footer {
     letter-spacing: 6px;
     color: transparent;
     -webkit-text-stroke: 1.5px var(--purple-bright);
-    filter: drop-shadow(0 0 20px var(--purple));
+    filter: drop-shadow(0 0 8px var(--purple));
 }
 
 .events-page-title p {

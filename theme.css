@@ -25,16 +25,9 @@
         0 0 18px rgba(0, 0, 0, 0.20); */
 
     --blue-lgs:
-        0 0 0 1px rgba(59, 130, 255, 0.25),
-        0 0 20px rgba(59, 130, 255, 0.35),
-        0 0 50px rgba(59, 130, 255, 0.15),
-        0 4px 12px rgba(0, 0, 0, 0.4),
-        inset 3px 3px 0.5px -3.5px rgba(59, 130, 255, 0.20),
-        inset -3px -3px 0.5px -3.5px rgba(120, 170, 255, 0.95),
-        inset 1px 1px 1px -0.5px rgba(120, 170, 255, 0.85),
-        inset -1px -1px 1px -0.5px rgba(120, 170, 255, 0.85),
-        inset 0 0 6px 6px rgba(59, 130, 255, 0.18),
-        inset 0 0 2px 2px rgba(59, 130, 255, 0.10);
+        0 0 0 1px rgba(59, 130, 255, 0.15),
+        0 0 15px rgba(59, 130, 255, 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.4);
 
 
     --bg: #000000;
@@ -55,29 +48,18 @@
     --border-blue: hsl(200, 92%, 24%);
     --text-red: #990b0b;
     --lgs:
-        0 2px 6px rgba(0, 0, 0, 0.12),
-        inset 3px 3px 0.5px -3.5px rgba(255, 255, 255, 0.09),
-        inset -3px -3px 0.5px -3.5px rgba(255, 255, 255, 0.85),
-        inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.60),
-        inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.60),
-        inset 0 0 6px 6px rgba(255, 255, 255, 0.10),
-        inset 0 0 2px 2px rgba(255, 255, 255, 0.05),
-        0 0 18px rgba(0, 0, 0, 0.20);
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.2);
 
     --red-lgs:
-        0 2px 8px rgba(220, 20, 60, 0.25),
-        0 0 20px rgba(0, 0, 0, 0.15),
-        inset 1px 1px 1px rgba(255, 180, 180, 0.6),
-        inset -1px -1px 1px rgba(139, 0, 0, 0.4),
-        inset 0 0 8px 2px rgba(255, 50, 50, 0.1),
-        inset 3px 3px 4px -2px rgba(255, 255, 255, 0.2),
-        inset -3px -3px 4px -2px rgba(0, 0, 0, 0.1);
+        0 0 0 1px rgba(220, 20, 60, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.2);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
     /* ── Blue glow / shadow tokens for micro-interactions ── */
     --hsl-blue: 220, 100%, 65%;
     --hsl-blue-dim: 221, 91%, 43%;
     --hsl-blue-dark: 220, 70%, 15%;
-    --glow-blue: 0 0 0 1px hsla(var(--hsl-blue), 0.25), 0 8px 28px hsla(var(--hsl-blue), 0.22);
-    --shadow-blue-lift: 0 14px 40px hsla(0, 0%, 0%, 0.42);
+    --glow-blue: 0 0 0 1px hsla(var(--hsl-blue), 0.15), 0 6px 20px hsla(var(--hsl-blue), 0.12);
+    --shadow-blue-lift: 0 10px 30px hsla(0, 0%, 0%, 0.35);
 }
