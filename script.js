@@ -252,7 +252,7 @@ function initPageAnimations(namespace) {
 // ══════════════════════════════════════════════════════════════
 //  LANYARD
 // ══════════════════════════════════════════════════════════════
-const DISCORD_USER_ID = '172108151024254976';
+const DISCORD_USER_ID = '769625446936608795';
 
 async function getLanyardData() {
   // 1. Instantly inject from Session Storage Cache (Eliminates Alt-text pops entirely)
@@ -437,7 +437,7 @@ async function setDiscordFavicon() {
       applyFavicon(cached);
       return;
     }
-    const res = await fetch(`https://api.lanyard.rest/v1/users/172108151024254976`);
+    const res = await fetch(`https://api.lanyard.rest/v1/users/769625446936608795`);
     const json = await res.json();
     if (json.success) {
       const { id, avatar } = json.data.discord_user;
